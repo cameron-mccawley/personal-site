@@ -1,0 +1,86 @@
+baseurl      = "cameron-mccawley.github.io"
+title        = "Cameron McCawley"
+languageCode = "en-us"
+theme        = "hello-friend-ng"
+paginate     = 10
+
+[params]
+  dateform        = "Jan 2, 2006"
+  dateformShort   = "Jan 2"
+  dateformNum     = "2006-01-02"
+  dateformNumTime = "2006-01-02 15:04 -0700"
+
+  # Metadata mostly used in document's head
+  description = "Homepage by Cameron McCawley"
+  keywords = "homepage, blog, development, programming, security, cybersecurity, hacking, pwning, ctf"
+  images = [""]
+
+  # Directory name of your blog content (default is `content/posts`)
+  contentTypeName = "blog"
+  # Default theme "light" or "dark"
+  defaultTheme = "dark"
+
+  footerLeft = "Powered by <a href=\"http://gohugo.io\">Hugo</a>"
+  footerRight = "Made with &#10084; by <a href=\"https://github.com/rhazdon\">Djordje Atlialp</a>"
+
+
+  [[params.social]]
+      name = "email"
+      url = "cameronismccawley@gmail.com"
+  [[params.social]]
+      name = "github"
+      url = "https://github.com/cameron-mccawley"
+  [[params.social]]
+      name = "linkedin"
+      url = "https://www.linkedin.com/in/cameron-mccawley/"
+  [[params.social]]
+      name = "keybase"
+      url = "https://keybase.io/cameronmccawley"
+  [[params.social]]
+      name = "ctftime"
+      url = "https://ctftime.org/team/12858"
+
+[taxonomies]
+    category = "blog"
+    tag      = "tags"
+    series   = "series"
+
+[languages]
+  [languages.en]
+
+    homeSubtitle = "CS/Security Student"
+
+
+    title = "Cameron McCawley"
+    keywords = ""
+    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+    readOtherPosts = "Read other posts"
+
+    [languages.en.params.logo]
+      logoText = "cd ~/cameronmccawley"
+      logoHomeLink = "/"
+    # or
+    #
+    # path = "/img/your-example-logo.svg"
+    # alt = "Your example logo alt text"
+
+  # And you can even create generic menu
+[menu]
+  [[menu.main]]
+    identifier = "about"
+    name       = "About"
+    url        = "/about/"
+  [[menu.main]]
+    identifier = "blog"
+    name       = "Blog"
+    url        = "/blog/"
+  #[[menu.main]]
+   # identifier = "projects"
+    #name       = "Projects"
+    #url        = "/projects/"
+  [[menu.main]]
+    identifier = "resume"
+    name = "Resume"
+    url = "/resume.pdf"
+
+
