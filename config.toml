@@ -1,4 +1,4 @@
-baseurl      = "cameron-mccawley.github.io"
+baseurl      = "localhost"
 title        = "Cameron McCawley"
 languageCode = "en-us"
 theme        = "hello-friend-ng"

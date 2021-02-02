@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blogs on Cameron McCawley</title>
+    <link>localhost/blog/</link>
+    <description>Recent content in Blogs on Cameron McCawley</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 01 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="localhost/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OSU League 2020/2021 - Snowcone Writeup</title>
+      <link>localhost/blog/snowcone-writeup/</link>
+      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>localhost/blog/snowcone-writeup/</guid>
+      <description>Another day, another intrusion here at IcyRetina. Can you help recover the encrypted files APT42 stole from this victim?
+ The catagory of this challenge is malware. To start, we are given a pcapng file named snowcone. Opening this up in Wireshark we are able to see an interesting http stream with the info of GET /snowcone.exe HTTP/1.1.
+  Exporting this stream as an http object will allow us to get the file.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - Copper Writeup</title>
+      <link>localhost/blog/copper/</link>
+      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>localhost/blog/copper/</guid>
+      <description>Time to smith some copper!
+ For this challenge, we are given a python script that was used to encrypt the flag, along with the output file that was created from it.
+#!/usr/bin/env python3 from Crypto.Util.number import * import secrets e = 3 while True: p = getPrime(1024) q = getPrime(1024) if p % e != 1 and q % e != 1: break N = p * q print(&amp;#34;N =&amp;#34;, N) with open(&amp;#34;flag&amp;#34;, &amp;#34;r&amp;#34;) as f: flag = f.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - Cookie Writeup</title>
+      <link>localhost/blog/cookie/</link>
+      <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>localhost/blog/cookie/</guid>
+      <description>pls beat the game
+ In this challenge, we are given a command line game of cookie clicker! Running the binary we see the game:
+COOKIES: 50000 GRANDMAS: 0 COOKIES PER SECOND: 0 WIN CONDITION: 18000000000000000000 COOKIES MENU: 1. Bake 100 cookies 2. Hire a grandma to bake 100 cookies per second [COST 1000 COOKIES] 3. Improve your baking rate by +100 cookies per click [COST 1000 COOKIES] 4. Improve your grandmas baking rate by +100 cookies per second [COST 1000 COOKIES] Enter any key to refresh So it looks like we start out with 50,000 cookies, and we need to get to 18,000,000,000,000,000,000.</description>
+    </item>
+    
+  </channel>
+</rss>

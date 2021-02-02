@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Time to smith some copper!
+ For this challenge, we are given a python script that was used to encrypt the flag, along with the output file that was created from it.
+#!/usr/bin/env python3 from Crypto.Util.number import * import secrets e = 3 while True: p = getPrime(1024) q = getPrime(1024) if p % e != 1 and q % e != 1: break N = p * q print(&amp;#34;N =&amp;#34;, N) with open(&amp;#34;flag&amp;#34;, &amp;#34;r&amp;#34;) as f: flag = f." />
+<meta name="keywords" content=", osuleague, ctf, security" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="localhost/blog/copper/" />
+
+
+    <title>
+        
+            OSU League 2020/2021 - Copper Writeup :: Cameron McCawley 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/localhost/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
+
+
+
+
+
+
+<meta itemprop="name" content="OSU League 2020/2021 - Copper Writeup">
+<meta itemprop="description" content="Time to smith some copper!
+ For this challenge, we are given a python script that was used to encrypt the flag, along with the output file that was created from it.
+#!/usr/bin/env python3 from Crypto.Util.number import * import secrets e = 3 while True: p = getPrime(1024) q = getPrime(1024) if p % e != 1 and q % e != 1: break N = p * q print(&#34;N =&#34;, N) with open(&#34;flag&#34;, &#34;r&#34;) as f: flag = f.">
+<meta itemprop="datePublished" content="2021-01-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-01-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="332">
+<meta itemprop="image" content="localhost"/>
+
+
+
+<meta itemprop="keywords" content="osuleague,ctf,security," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="localhost"/>
+
+<meta name="twitter:title" content="OSU League 2020/2021 - Copper Writeup"/>
+<meta name="twitter:description" content="Time to smith some copper!
+ For this challenge, we are given a python script that was used to encrypt the flag, along with the output file that was created from it.
+#!/usr/bin/env python3 from Crypto.Util.number import * import secrets e = 3 while True: p = getPrime(1024) q = getPrime(1024) if p % e != 1 and q % e != 1: break N = p * q print(&#34;N =&#34;, N) with open(&#34;flag&#34;, &#34;r&#34;) as f: flag = f."/>
+
+
+
+
+    <meta property="og:title" content="OSU League 2020/2021 - Copper Writeup" />
+<meta property="og:description" content="Time to smith some copper!
+ For this challenge, we are given a python script that was used to encrypt the flag, along with the output file that was created from it.
+#!/usr/bin/env python3 from Crypto.Util.number import * import secrets e = 3 while True: p = getPrime(1024) q = getPrime(1024) if p % e != 1 and q % e != 1: break N = p * q print(&#34;N =&#34;, N) with open(&#34;flag&#34;, &#34;r&#34;) as f: flag = f." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="localhost/blog/copper/" />
+<meta property="og:image" content="localhost"/>
+<meta property="article:published_time" content="2021-01-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-01-22T00:00:00+00:00" /><meta property="og:site_name" content="Cameron McCawley" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-01-22 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/cameronmccawley</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/localhost/about/">About</a></li><li><a href="/localhost/blog/">Blog</a></li><li><a href="/localhost/resume.pdf">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="localhost/blog/copper/">OSU League 2020/2021 - Copper Writeup</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <blockquote>
+<p>Time to smith some copper!</p>
+</blockquote>
+<p>For this challenge, we are given a python script that was used to encrypt the flag, along with the output file that was created from it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env python3</span>
+
+<span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> secrets
+
+e <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+
+<span style="color:#66d9ef">while</span> True:
+    p <span style="color:#f92672">=</span> getPrime(<span style="color:#ae81ff">1024</span>)
+    q <span style="color:#f92672">=</span> getPrime(<span style="color:#ae81ff">1024</span>)
+
+    <span style="color:#66d9ef">if</span> p <span style="color:#f92672">%</span> e <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">and</span> q <span style="color:#f92672">%</span> e <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">break</span>
+
+N <span style="color:#f92672">=</span> p <span style="color:#f92672">*</span> q
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;N =&#34;</span>, N)
+
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;flag&#34;</span>, <span style="color:#e6db74">&#34;r&#34;</span>) <span style="color:#66d9ef">as</span> f:
+    flag <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>read()<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>encode()
+<span style="color:#66d9ef">assert</span>(len(flag) <span style="color:#f92672">==</span> <span style="color:#ae81ff">42</span>)
+
+padding <span style="color:#f92672">=</span> secrets<span style="color:#f92672">.</span>token_bytes(<span style="color:#ae81ff">210</span>)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;leak =&#34;</span>, <span style="color:#e6db74">&#34;&#39;&#34;</span> <span style="color:#f92672">+</span> padding<span style="color:#f92672">.</span>hex() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#39;&#34;</span>) <span style="color:#75715e"># Oops</span>
+
+m <span style="color:#f92672">=</span> bytes_to_long(padding <span style="color:#f92672">+</span> flag)
+c <span style="color:#f92672">=</span> pow(m, e, N)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;c =&#34;</span>, c)
+
+</code></pre></div><p>We can see that we get a leak of the padding, specifically a leak of the most significant bits of the message.  Using something known as the Coppersmith Attack, we can actually find the rest of the message.</p>
+<p>In the usual RSA model, you have a ciphertext <code>c</code>, a modulus <code>N</code>, and a public exponent <code>e</code>.  We find <code>m</code> such <code>m^e = c mod n</code>.  Now, this is a relaxed model that we can solve.  We have <code>c = (m+x)^e</code>, we know part of the message <code>m</code> from the leak, but we don&rsquo;t know <code>x</code>.  Since our leak is the same every tiem, Coppersmith says that if we are looking for <code>N^1/e</code> of the message, it is then a <code>small root</code> and we should be able to find it pretty quickly.</p>
+<p>All we need to do is create our polynomial <code>f(x) = (m+x)^e - c</code>, which has a root we want to find <code>modulo n</code>.  This can be done pretty simply using sagemath.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#!/usr/bin/env sage</span>
+<span style="color:#f92672">from</span> sage.all <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> Crypto.Util.number <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+
+c<span style="color:#f92672">=</span> <span style="color:#ae81ff">17868294450269675883986469170882257064627428433707603500890067752063961604684654851805829469837273448999725432428147126421641016742425430357133618533629986319659863748262189446225365034508244240177060787410517018220032421721807953095837207003218011760432348606030572134907021265373169592163937292370872393174147157321516093197173216520335841446612508147601247895343214122792281835160338349714598182348561753092414308025112752919860278424873227347935031551007908454205414184850898725554932882780037415042307105104268365961626556278590673592416312815796753710080179427223832639267694963514301632816040398522317698229035</span>
+leak <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x66c7e057ab2095241bc7b83cf6a7c6dde60693076d8573de510fc361889fb66e0960af222ead2da1b1c6fcf4a1cfcf0a20ee7cc61e976f3cad63958fb9852c32fe9e4698f87d07c30791a4e6407cf66a3cf93facdf1d276981e816dd3c0e7cbeb648c5297b0a5acc47afb46686eae964e0057a8be39b29fbdecd3774135bc88f6b067698571f05c5ba785dc4925892da19b3b7640b07807c6af3052b7ce29e125df0f97d4abcbcfd6d93ec94a90ee5c91d09a76e979977e774bb9ae1e1d287476c91d3f33a6018476d7e0040f930be848195</span>
+N <span style="color:#f92672">=</span> <span style="color:#ae81ff">18186023870103797120509091528210052017835202453642298117209863460505101021646819059351051653975541446071417302173552526656704895118368722200093087033737225264434273920451139462678043460481827716933677625256913291232865883170237072770097048652916180533727179614963237586711744465662269631274051008365748411477559298662467771638534575955123843497755288315232910699898049309025041620697001021306545139814617468700207648841194748772113954806702803092687574614539181545562465116769262452017256134407896879646761346081107053459497459090825261620696915937606342541436445863502433642370656618275284587683633176676092354921499</span>
+e <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+
+R <span style="color:#f92672">=</span> Zmod(N)
+P<span style="color:#f92672">.&lt;</span>x<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> PolynomialRing(R, implementation<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;NTL&#39;</span>)
+
+f <span style="color:#f92672">=</span> ((leak <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#ae81ff">42</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span>)) <span style="color:#f92672">+</span> x)<span style="color:#f92672">^</span>e <span style="color:#f92672">-</span> c <span style="color:#75715e">#We also need to bit shift our padding</span>
+flag <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>small_roots() [<span style="color:#ae81ff">0</span>]
+
+<span style="color:#66d9ef">print</span>(long_to_bytes(flag))
+</code></pre></div><p>And running it with sage we get the flag!</p>
+<pre><code>$sage sol.sage
+osu{RSA-N3eD$_suPER-SECReT_R@NdOm_pAddiN9}
+</code></pre>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="localhost/tags/osuleague/">osuleague</a></span>
+        <span class="tag"><a href="localhost/tags/ctf/">ctf</a></span>
+        <span class="tag"><a href="localhost/tags/security/">security</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="localhost/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+          </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/localhost/bundle.min.af435e44374f1e99a669ea8cd5bb9a2fceed80588941a451bfddb66b86a67c9f40b0f417e9543a763f809aa7e9300d7b1d69bf99615810ba02ac70396d50fad5.js" integrity="sha512-r0NeRDdPHpmmaeqM1buaL87tgFiJQaRRv922a4amfJ9AsPQX6VQ6dj&#43;AmqfpMA17HWm/mWFYELoCrHA5bVD61Q=="></script>
+
+
+
+    </body>
+</html>
