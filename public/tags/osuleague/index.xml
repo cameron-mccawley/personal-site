@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>osuleague on Cameron McCawley</title>
-    <link>cameron-mccawley.github.io/tags/osuleague/</link>
+    <link>/tags/osuleague/</link>
     <description>Recent content in osuleague on Cameron McCawley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 01 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="cameron-mccawley.github.io/tags/osuleague/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/osuleague/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>OSU League 2020/2021 - Snowcone Writeup</title>
-      <link>cameron-mccawley.github.io/blog/snowcone-writeup/</link>
+      <link>/blog/snowcone-writeup/</link>
       <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>cameron-mccawley.github.io/blog/snowcone-writeup/</guid>
+      <guid>/blog/snowcone-writeup/</guid>
       <description>Another day, another intrusion here at IcyRetina. Can you help recover the encrypted files APT42 stole from this victim?
  The catagory of this challenge is malware. To start, we are given a pcapng file named snowcone. Opening this up in Wireshark we are able to see an interesting http stream with the info of GET /snowcone.exe HTTP/1.1.
   Exporting this stream as an http object will allow us to get the file.</description>
@@ -21,10 +21,10 @@
     
     <item>
       <title>OSU League 2020/2021 - Copper Writeup</title>
-      <link>cameron-mccawley.github.io/blog/copper/</link>
+      <link>/blog/copper/</link>
       <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>cameron-mccawley.github.io/blog/copper/</guid>
+      <guid>/blog/copper/</guid>
       <description>Time to smith some copper!
  For this challenge, we are given a python script that was used to encrypt the flag, along with the output file that was created from it.
 #!/usr/bin/env python3 from Crypto.Util.number import * import secrets e = 3 while True: p = getPrime(1024) q = getPrime(1024) if p % e != 1 and q % e != 1: break N = p * q print(&amp;#34;N =&amp;#34;, N) with open(&amp;#34;flag&amp;#34;, &amp;#34;r&amp;#34;) as f: flag = f.</description>
@@ -32,13 +32,130 @@
     
     <item>
       <title>OSU League 2020/2021 - Cookie Writeup</title>
-      <link>cameron-mccawley.github.io/blog/cookie/</link>
+      <link>/blog/cookie/</link>
       <pubDate>Sat, 16 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>cameron-mccawley.github.io/blog/cookie/</guid>
+      <guid>/blog/cookie/</guid>
       <description>pls beat the game
  In this challenge, we are given a command line game of cookie clicker! Running the binary we see the game:
 COOKIES: 50000 GRANDMAS: 0 COOKIES PER SECOND: 0 WIN CONDITION: 18000000000000000000 COOKIES MENU: 1. Bake 100 cookies 2. Hire a grandma to bake 100 cookies per second [COST 1000 COOKIES] 3. Improve your baking rate by +100 cookies per click [COST 1000 COOKIES] 4. Improve your grandmas baking rate by +100 cookies per second [COST 1000 COOKIES] Enter any key to refresh So it looks like we start out with 50,000 cookies, and we need to get to 18,000,000,000,000,000,000.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - many_time_pad Writeup</title>
+      <link>/blog/many_time_pad/</link>
+      <pubDate>Sat, 05 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/many_time_pad/</guid>
+      <description>For this challenge, we are giving a link to a web page. Going to it, we are greeted with this:
+  They also give us the source code for the web server:
+from app import app from app import cfg from flask import render_template,request,redirect,make_response,send_file #serve index.html @app.route(&amp;#34;/&amp;#34;) def index(): return render_template(&amp;#34;index.html&amp;#34;) #encrypt messages that are POSTed to /encrypt @app.route(&amp;#34;/encrypt&amp;#34;, methods=[&amp;#34;POST&amp;#34;]) def encrypt(): #truncate message if longer than 256 bytes, convert to byte string plaintext = request.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - web 2 Writeup</title>
+      <link>/blog/web2/</link>
+      <pubDate>Sat, 21 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/web2/</guid>
+      <description>For this challenge, we are given a website. Opening the link takes us to this page:
+  Looks like we are presented with a login. We are also given the source code to this webpage, so maybe we can do something with that.
+Looking through the source code, we see a comment mentioning a vulnerable piece of code:
+// XXX: this is vuln to SQL injection!  $query_str = &amp;#34;SELECT id, username, password FROM users WHERE username=&amp;#39;$username&amp;#39;;&amp;#34;; echo &amp;#39;* &amp;lt;b&amp;gt;Query:&amp;lt;/b&amp;gt; &amp;#39; .</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - Russian Nesting Bathhouse Writeup</title>
+      <link>/blog/russian_nesting_bathhouse/</link>
+      <pubDate>Sat, 14 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/russian_nesting_bathhouse/</guid>
+      <description>I recall storing the password as a PDF, and I xored it with a 4-byte repeating key (e.g. ab cd ef 01 ab cd ef 01 &amp;hellip;), but I forgot my key, and I cannot get it back :(. Hint: you will not need to brute force this.
+ This is one of my first introductions to a steganography challenge, and after completing it I can attest that I&amp;rsquo;m not the biggest fan of them.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - RSA 2 Writeup</title>
+      <link>/blog/rsa2/</link>
+      <pubDate>Fri, 13 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/rsa2/</guid>
+      <description>RSA 2 is a bit of a continuation off of RSA 1. In order to access the challenge, we need to use openssl with the flag from RSA 1 to decrypt the TAR file. To do this we can run openssl enc -d -aes-256-ctr -pbkdf2 -nosalt -p -in rsa2.tar.gz.enc -out rsa2.tar.gz, input the flag, and we get our challenge.
+Looking at our output.txt, we can see that we are only given N and c.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - RSA 1 Writeup</title>
+      <link>/blog/rsa1/</link>
+      <pubDate>Wed, 11 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/rsa1/</guid>
+      <description>So, to start off, I knew pretty much nothing about cryptography and assumed that it was probably all black magic before this, but after spending 3 days on this challenge asking for help and googling everything I could, I can now say with abosulte certainty that my assumptions are correct. Crypto is black magic.
+To start, we are given two files. puzzle.py, which is the script that was used to encrypt the flag, and output.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - ret2win Writeup</title>
+      <link>/blog/ret2win/</link>
+      <pubDate>Sat, 07 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/ret2win/</guid>
+      <description>The goal of this challenge is to redirect code flow to the win() function. Opening up the binary in GDB, we can see some other interesting functions that we have.
+0x0000000000400607 win 0x0000000000400652 part2 0x0000000000400699 part1 0x00000000004006ee main Let&amp;rsquo;s disassemble them and see what&amp;rsquo;s going on:
+gdb-peda$ disass main Dump of assembler code for function main: 0x00000000004006ee &amp;lt;+0&amp;gt;:	push rbp 0x00000000004006ef &amp;lt;+1&amp;gt;:	mov rbp,rsp 0x00000000004006f2 &amp;lt;+4&amp;gt;:	mov eax,0x0 0x00000000004006f7 &amp;lt;+9&amp;gt;:	call 0x400699 &amp;lt;part1&amp;gt; 0x00000000004006fc &amp;lt;+14&amp;gt;:	mov eax,0x0 0x0000000000400701 &amp;lt;+19&amp;gt;:	pop rbp 0x0000000000400702 &amp;lt;+20&amp;gt;:	ret End of assembler dump.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - printf_is_echo Writeup</title>
+      <link>/blog/printf_is_echo/</link>
+      <pubDate>Wed, 04 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/printf_is_echo/</guid>
+      <description>Oh boy. We got by the title what looks to be some sort of challenge involving printf. Let&amp;rsquo;s run the binary and take a look.
+did you know the unix tool echo can be implemented with two lines of C? I&#39;ll echo some bytes, try it! boop boop I used ASLR (with PIE), so the address of the win function is randomized! I&#39;ll give you the last three hex digits of the address as a hint: 0x79a Type &amp;quot;I give up&amp;quot; to acknowledge that this binary is unhackable I give up Uh oh, so ASLR is enabled.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - cowsay Writeup</title>
+      <link>/blog/cowsay/</link>
+      <pubDate>Sat, 31 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/cowsay/</guid>
+      <description>We are given a link to a website for this challenge that has a login page. I first tried the obvious stuff such as admin, password, etc. But no such luck. Thankfully, I remembered a Hack the Box challenge that dealt with a similar sceanario, that being SQL injection!!!
+If we type in &#39;or&#39;&#39;=&#39; into both the user name and password fields, we can escape the query and make it return true without actually needing to supply the correct password.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - pwn_review Writeup</title>
+      <link>/blog/pwn_review/</link>
+      <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/pwn_review/</guid>
+      <description>A simple review challenge. Let&amp;rsquo;s see how it goes :3
+So running the binary, we get some info:
+This is a review challenge, you know the drill Return to the win function and get the flag gimme win function Ok, so we need to return to the win function. My guess is that this program is going to be susceptible to a buffer overflow. Turns out it is! After screaming at it for a bit, I was able to determine the buffer was 32 bytes, so our padding will be 40 bytes.</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - Unprintable Writeup</title>
+      <link>/blog/unprintable/</link>
+      <pubDate>Fri, 30 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/unprintable/</guid>
+      <description>We are given a binary, so let&amp;rsquo;s see what it does:
+I found some empty room in the RAM on this system, and prepared some especially for you! But I&#39;m worried you might put something evil in it, so I&#39;m not going to print it out Here&#39;s your special RAM, happy birthday!: 0x7ffd617472f0 What are you going to do with it? I wanna consume it I hope you enjoyed your memory!</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - Mash Writeup</title>
+      <link>/blog/mash/</link>
+      <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/mash/</guid>
+      <description>Lets just run that binary
+PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffffffffff CURRENT COUNT: 0000000000000000 hmm, looks like we would have to press that enter button about 18446744073709551615 times. Doesnt seem that doable, so lets try another approach.
+Typing a bunch of As we get:
+PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffffffffff CURRENT COUNT: 0000000000000000 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffff000a41 CURRENT COUNT: 0x4141414141414141 Interesting, looks like we can override the buffer here and have control over the counter.</description>
     </item>
     
   </channel>

