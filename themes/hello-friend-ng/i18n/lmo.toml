@@ -34,6 +34,3 @@ other = "Contegnuu"
 [wordCount]
 one   = "Ona parolla"
 other = "{{ .Count }} paroll"
-
-[lastModified]
-other = "Last update"
