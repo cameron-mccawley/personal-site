@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 01 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OSU League 2020/2021 - almostnopship0 Writeup</title>
+      <link>/blog/almostnopship0/</link>
+      <pubDate>Sun, 07 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/almostnopship0/</guid>
+      <description>For this web challenge, we are given a link to a website that bears a striking resemblance to a certain DEF CON challenge. pew pew
+  We are told the location of the flag and are provided the source code for the server, along with a nice text box where we can enter our team name.
+  Cool! Four P&amp;rsquo;s are better than three. Now Let&amp;rsquo;s take a look at that source code:</description>
+    </item>
+    
     <item>
       <title>OSU League 2020/2021 - Snowcone Writeup</title>
       <link>/blog/snowcone-writeup/</link>

