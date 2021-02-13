@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 07 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OSU League 2020/2021 - make_a_hash Writeup</title>
+      <link>/blog/make_a_hash/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/make_a_hash/</guid>
+      <description>For this crypto challenge, we are given a service we can connect to along with the source code of that service. Let&amp;rsquo;s connect to it:
+Welcome to secure_hash_TM bug bounty program! If you can find a second preimage to my hash, you will get a reward! Press Enter to continue to your challenge I hashed the hexstring 72432e1cd769b8ba328a8656ccaa9165023b26c87a0a7a2b9b83ccb882a6aabc4419c0ff35b2e6a6ce7202bb3ab590dcc957dcc946d3cfce5918d991db3e637f8e49ad48ec6fed47c73f7283e8d2d2136ea88bd67f1f1c0fd1dcac0c69d5aea4 using secure_hash_tm(), and my output was 1ab815160ddb4d48f00c472b59218b28a9b16f12efa40440d00c8709fb5ca8dee085f027460eeb642886ce71931147e658638dba71a4f2aa62011df4bfc69952 (feel free to check if you don&#39;t believe me) Please find me a value &#39;x&#39; such that secure_hash_tm(x) == 1ab815160ddb4d48f00c472b59218b28a9b16f12efa40440d00c8709fb5ca8dee085f027460eeb642886ce71931147e658638dba71a4f2aa62011df4bfc69952 but x !</description>
+    </item>
+    
     <item>
       <title>OSU League 2020/2021 - almostnopship0 Writeup</title>
       <link>/blog/almostnopship0/</link>
