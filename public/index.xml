@@ -180,6 +180,17 @@ PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffffffffff CURRENT C
     </item>
     
     <item>
+      <title></title>
+      <link>/blog/rayhanns_return/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/rayhanns_return/</guid>
+      <description>rayhanns_return For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
+The first thing I did was mount the ISO file to my file system to see its contents:
+$ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost+found rhodgson.kdbx Interesting, we have a keepass password database.</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
