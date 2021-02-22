@@ -1,4 +1,11 @@
-# rayhanns_return
+---
+title: "OSU League 2020/2021 - rayhanns_return Writeup"
+date: 2021-02-22
+tags:
+  - osuleague
+  - ctf
+  - security
+---
 
 For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the `rockyou.txt` wordlist.
 

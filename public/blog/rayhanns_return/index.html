@@ -5,10 +5,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="">
-<meta name="description" content="rayhanns_return For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
+<meta name="description" content="For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
 The first thing I did was mount the ISO file to my file system to see its contents:
 $ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost&#43;found rhodgson.kdbx Interesting, we have a keepass password database." />
-<meta name="keywords" content="" />
+<meta name="keywords" content=", osuleague, ctf, security" />
 <meta name="robots" content="noodp" />
 <meta name="theme-color" content="" />
 <link rel="canonical" href="/blog/rayhanns_return/" />
@@ -16,7 +16,7 @@ $ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost&#
 
     <title>
         
-             :: Cameron McCawley 
+            OSU League 2020/2021 - rayhanns_return Writeup :: Cameron McCawley 
         
     </title>
 
@@ -34,41 +34,45 @@ $ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost&#
 
 
 
-<meta itemprop="name" content="">
-<meta itemprop="description" content="rayhanns_return For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
+<meta itemprop="name" content="OSU League 2020/2021 - rayhanns_return Writeup">
+<meta itemprop="description" content="For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
 The first thing I did was mount the ISO file to my file system to see its contents:
 $ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost&#43;found rhodgson.kdbx Interesting, we have a keepass password database.">
-
-<meta itemprop="wordCount" content="658">
+<meta itemprop="datePublished" content="2021-02-22T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-02-22T00:00:00+00:00" />
+<meta itemprop="wordCount" content="657">
 <meta itemprop="image" content=""/>
 
 
 
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="osuleague,ctf,security," />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content=""/>
 
-<meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="rayhanns_return For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
+<meta name="twitter:title" content="OSU League 2020/2021 - rayhanns_return Writeup"/>
+<meta name="twitter:description" content="For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
 The first thing I did was mount the ISO file to my file system to see its contents:
 $ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost&#43;found rhodgson.kdbx Interesting, we have a keepass password database."/>
 
 
 
-    <meta property="og:title" content="" />
-<meta property="og:description" content="rayhanns_return For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
+    <meta property="og:title" content="OSU League 2020/2021 - rayhanns_return Writeup" />
+<meta property="og:description" content="For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
 The first thing I did was mount the ISO file to my file system to see its contents:
 $ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost&#43;found rhodgson.kdbx Interesting, we have a keepass password database." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/blog/rayhanns_return/" />
 <meta property="og:image" content=""/>
-<meta property="og:site_name" content="Cameron McCawley" />
+<meta property="article:published_time" content="2021-02-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-22T00:00:00+00:00" /><meta property="og:site_name" content="Cameron McCawley" />
 
 
 
 
 
+
+    <meta property="article:published_time" content="2021-02-22 00:00:00 &#43;0000 UTC" />
 
 
 
@@ -134,13 +138,12 @@ $ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost&#
         </div>
 
         <article>
-            <h2 class="post-title"><a href="/blog/rayhanns_return/"></a></h2>
+            <h2 class="post-title"><a href="/blog/rayhanns_return/">OSU League 2020/2021 - rayhanns_return Writeup</a></h2>
 
             
 
             <div class="post-content">
-                <h1 id="rayhanns_return">rayhanns_return</h1>
-<p>For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the <code>rockyou.txt</code> wordlist.</p>
+                <p>For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the <code>rockyou.txt</code> wordlist.</p>
 <p>The first thing I did was mount the ISO file to my file system to see its contents:</p>
 <pre><code>$ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk
 $ cd /mnt/disk
@@ -244,6 +247,9 @@ cat: .flag: Permission denied
         <hr />
 
         <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="tags/osuleague">osuleague</a></span><span class="tag"><a href="tags/ctf">ctf</a></span><span class="tag"><a href="tags/security">security</a></span>
+  				</p>
   		</div>
     </main>
 

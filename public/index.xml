@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 12 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OSU League 2020/2021 - rayhanns_return Writeup</title>
+      <link>/blog/rayhanns_return/</link>
+      <pubDate>Mon, 22 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/rayhanns_return/</guid>
+      <description>For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
+The first thing I did was mount the ISO file to my file system to see its contents:
+$ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost+found rhodgson.kdbx Interesting, we have a keepass password database.</description>
+    </item>
+    
     <item>
       <title>OSU League 2020/2021 - make_a_hash Writeup</title>
       <link>/blog/make_a_hash/</link>
@@ -177,17 +188,6 @@ I found some empty room in the RAM on this system, and prepared some especially 
 PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffffffffff CURRENT COUNT: 0000000000000000 hmm, looks like we would have to press that enter button about 18446744073709551615 times. Doesnt seem that doable, so lets try another approach.
 Typing a bunch of As we get:
 PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffffffffff CURRENT COUNT: 0000000000000000 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffff000a41 CURRENT COUNT: 0x4141414141414141 Interesting, looks like we can override the buffer here and have control over the counter.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/blog/rayhanns_return/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/rayhanns_return/</guid>
-      <description>rayhanns_return For this challenge, we are given three files: A PDF that explains the lore/backstory of our task, an ISO file, and a wordlist that seems to be a derivitive of the rockyou.txt wordlist.
-The first thing I did was mount the ISO file to my file system to see its contents:
-$ sudo mount -o loop CTG-2021-02-19-001.iso /mnt/disk $ cd /mnt/disk $ ls lost+found rhodgson.kdbx Interesting, we have a keepass password database.</description>
     </item>
     
     <item>
