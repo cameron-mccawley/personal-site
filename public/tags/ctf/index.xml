@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 22 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OSU League 2020/2021 - boxy Writeup</title>
+      <link>/blog/boxy/</link>
+      <pubDate>Mon, 01 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/boxy/</guid>
+      <description>Time to poke at a linux box and see what there is to find. Im going to give you the flag right now, and the program to decrypt it too! You will have to find 7 flags to solve this challenge! They will be combined through Shamir Secret Sharing, and allow you to decrypt the flag!
+ For this challenge, we worked in one large group taking turns to solve various parts of the box.</description>
+    </item>
+    
     <item>
       <title>OSU League 2020/2021 - rayhanns_return Writeup</title>
       <link>/blog/rayhanns_return/</link>
