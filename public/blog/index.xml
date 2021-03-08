@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blogs on Cameron McCawley</title>
+    <title>Blog on Cameron McCawley</title>
     <link>/blog/</link>
-    <description>Recent content in Blogs on Cameron McCawley</description>
+    <description>Recent content in Blog on Cameron McCawley</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 01 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright><atom:link href="/blog/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>
+ex.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OSU League 2020/2021 - WEB_THREE</title>
+      <link>/blog/web3/</link>
+      <pubDate>Sun, 07 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/web3/</guid>
+      <description>For this challenge, we are given a website that bears a resemblance to a previous challenge we did (cowsay), though this one is a bit more complicated.
+  We can start by just entering in some text and seeing what happens:
+  Neat! Let&amp;rsquo;s look at the source code:
+# coding=utf-8 from flask import render_template, render_template_string, flash, redirect, session, url_for, request, g, Markup, Response from app import app import uuid import traceback import os def _generate_cowsay_file(): return &amp;#39;/tmp/cow-&amp;#39; + str(uuid.</description>
+    </item>
+    
     <item>
       <title>OSU League 2020/2021 - boxy Writeup</title>
       <link>/blog/boxy/</link>
