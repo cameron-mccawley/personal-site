@@ -25,7 +25,7 @@ paginate     = 10
 
   [[params.social]]
       name = "email"
-      url = "cameronismccawley@gmail.com"
+      url = "mailto:cameronismccawley@gmail.com"
   [[params.social]]
       name = "github"
       url = "https://github.com/cameron-mccawley"

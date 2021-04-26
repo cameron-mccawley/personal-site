@@ -1,39 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/blog/</loc>
-    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ctf/</loc>
-    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/blog/web3/</loc>
-    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/osuleague/</loc>
-    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/security/</loc>
-    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2021-03-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -113,12 +83,12 @@
   </url>
   
   <url>
-    <loc>/blog/pwn_review/</loc>
+    <loc>/blog/unprintable/</loc>
     <lastmod>2020-10-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/blog/unprintable/</loc>
+    <loc>/blog/pwn_review/</loc>
     <lastmod>2020-10-30T00:00:00+00:00</lastmod>
   </url>
   
@@ -133,10 +103,60 @@
   
   <url>
     <loc>/blog/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/</loc>
+    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/ctf/</loc>
+    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/ncep_botez/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/ncep_xqc/</loc>
+  </url>
+  
+  <url>
+    <loc>/blog/scrambled-noodles/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/osuleague/</loc>
+    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/security/</loc>
+    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>/series/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-03-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>

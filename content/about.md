@@ -7,4 +7,4 @@ Cameron McCawley is a sophomore studying computer science at [Oregon State Unive
 
 Currently, he works as an undergraduate teaching assistant for OSU, where he helps remotely conducts labs for lower division CS classes.
 
-He's also a dedicated participant of the [OSU Security Club](https://www.osusec.org/), competing in many CTFs and CDC events under the team [OSUSEC](https://ctftime.org/team/12858).
+He also holds the officer position of Lab Manager for the [OSU Security Club](https://www.osusec.org/), competing in many CTFs and CDC events under the team [OSUSEC](https://ctftime.org/team/12858) while also keeping the team's infrastructure in check.
