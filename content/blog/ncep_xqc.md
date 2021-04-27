@@ -1,6 +1,6 @@
 ---
 title: "OSU League 2020/2021 - NCEP_XQC Writeup"
-date: 2021-4-10
+date: 2021-04-10
 tags:
   - osuleague
   - ctf

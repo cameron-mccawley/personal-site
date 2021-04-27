@@ -1,6 +1,6 @@
 ---
 title: "OSU League 2020/2021 - NCEP_BOTEZ Writeup"
-date: 2021-4-11
+date: 2021-04-11
 tags:
   - osuleague
   - ctf

@@ -1,6 +1,6 @@
 ---
 title: "OSU League 2020/2021 - scrambled_noodles Writeup"
-date: 2021-4-11
+date: 2021-04-18
 tags:
   - osuleague
   - ctf

