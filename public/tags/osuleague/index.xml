@@ -7,7 +7,37 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 07 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/osuleague/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/osuleague/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OSU League 2020/2021 - scrambled_noodles Writeup</title>
+      <link>/blog/scrambled-noodles/</link>
+      <pubDate>Sun, 18 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/scrambled-noodles/</guid>
+      <description>My assistant sent me this .wav as an update on a case he is working on, however I dont know what to do with it. Such a frustrating April Fools Joke, and I&amp;rsquo;m missing an update on this case.
+ For this challenge, we are given a WAV file that when played, Rick Rolls us&amp;hellip;. Thank you Lyell, very cool.
+After messing around with the file for a bit trying to figure out what to do with it, we eventually realized that there were frequencies in the song that were much too high to show up in audacity, so using an online tool to look at the file&amp;rsquo;s spectrogram, we see a link!</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - NCEP_BOTEZ Writeup</title>
+      <link>/blog/ncep_botez/</link>
+      <pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/ncep_botez/</guid>
+      <description>For this challenge, we are given a binary that is very similar looking to the one from NCEP_XQC. Running the program there is that same GNU chess game that we can interact with, but this time we have no control over the command line arguments, so no injection. Messing around with the program we can see that the only place we have any sort of control is when we make our move:</description>
+    </item>
+    
+    <item>
+      <title>OSU League 2020/2021 - NCEP_XQC Writeup</title>
+      <link>/blog/ncep_xqc/</link>
+      <pubDate>Sat, 10 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/ncep_xqc/</guid>
+      <description>For this challenge, we are given a simple program that just runs GNU chess. Right away we can see that it lets us input command line arguments! Maybe we can just do a simple commandline injection to cat the flag:
+$ nc ctf.ropcity.com 31314 WELCOME TO THE NORWEGIAN COLLEGE OF ELITE PWN Please enter your custom command line arguments, or just hit enter to begin your training: ; cat flag executing command: /usr/games/gnuchess -g -m ; cat flag GNU Chess 6.</description>
+    </item>
+    
     <item>
       <title>OSU League 2020/2021 - WEB_THREE</title>
       <link>/blog/web3/</link>
@@ -210,36 +240,6 @@ I found some empty room in the RAM on this system, and prepared some especially 
 PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffffffffff CURRENT COUNT: 0000000000000000 hmm, looks like we would have to press that enter button about 18446744073709551615 times. Doesnt seem that doable, so lets try another approach.
 Typing a bunch of As we get:
 PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffffffffff CURRENT COUNT: 0000000000000000 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA PRESS ENTER TO COUNT UP, FLAG WHEN CURRENT COUNT == 0xffffffffff000a41 CURRENT COUNT: 0x4141414141414141 Interesting, looks like we can override the buffer here and have control over the counter.</description>
-    </item>
-    
-    <item>
-      <title>OSU League 2020/2021 - NCEP_BOTEZ Writeup</title>
-      <link>/blog/ncep_botez/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/ncep_botez/</guid>
-      <description>For this challenge, we are given a binary that is very similar looking to the one from NCEP_XQC. Running the program there is that same GNU chess game that we can interact with, but this time we have no control over the command line arguments, so no injection. Messing around with the program we can see that the only place we have any sort of control is when we make our move:</description>
-    </item>
-    
-    <item>
-      <title>OSU League 2020/2021 - NCEP_XQC Writeup</title>
-      <link>/blog/ncep_xqc/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/ncep_xqc/</guid>
-      <description>For this challenge, we are given a simple program that just runs GNU chess. Right away we can see that it lets us input command line arguments! Maybe we can just do a simple commandline injection to cat the flag:
-$ nc ctf.ropcity.com 31314 WELCOME TO THE NORWEGIAN COLLEGE OF ELITE PWN Please enter your custom command line arguments, or just hit enter to begin your training: ; cat flag executing command: /usr/games/gnuchess -g -m ; cat flag GNU Chess 6.</description>
-    </item>
-    
-    <item>
-      <title>OSU League 2020/2021 - scrambled_noodles Writeup</title>
-      <link>/blog/scrambled-noodles/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/scrambled-noodles/</guid>
-      <description>My assistant sent me this .wav as an update on a case he is working on, however I dont know what to do with it. Such a frustrating April Fools Joke, and I&amp;rsquo;m missing an update on this case.
- For this challenge, we are given a WAV file that when played, Rick Rolls us&amp;hellip;. Thank you Lyell, very cool.
-After messing around with the file for a bit trying to figure out what to do with it, we eventually realized that there were frequencies in the song that were much too high to show up in audacity, so using an online tool to look at the file&amp;rsquo;s spectrogram, we see a link!</description>
     </item>
     
   </channel>
